@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'guard' => env('AUTH_GUARD', 'designer'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'designers'),
     ],
 
     /*
@@ -36,9 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'designer' => [
+            'driver' => 'sanctum',
+            'provider' => 'designers',
+        ],
+        'validator' => [
+            'driver' => 'sanctum',
+            'provider' => 'validators',
         ],
     ],
 
@@ -60,9 +64,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'designers' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Designer::class,
+        ],
+        'validators' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Validator::class,
         ],
 
         // 'users' => [
@@ -91,8 +99,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'designers' => [
+            'provider' => 'designers',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'validators' => [
+            'provider' => 'validators',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
