@@ -16,6 +16,7 @@ function App() {
           <Route index element={<GuestHome />} />
           <Route path='concepteur/login' element={<ConcepteurLogin />} />
           <Route path='validateur/login' element={<ValidateurLogin />} />
+          <Route path='admin/login' element={<AdminLogin/>} />
         </Route>
         <Route path='/concepteur' element={<ConcepteurIndex />}>
         </Route>
