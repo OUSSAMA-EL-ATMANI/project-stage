@@ -29,11 +29,8 @@ export default function GuestHome() {
           MOUMEN
         </h2>
         <p>Nous sommes là pour vous offrir nos meilleurs services :</p>
-        <div
+        <div className="d-flex justify-content-center flex-wrap" 
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             marginTop: "100px",
           }}
         >
@@ -62,7 +59,9 @@ export default function GuestHome() {
               alignItems: "center",
               justifyContent: "center",
               padding: "10px 20px",
-              margin: "0 10px",
+              width: '234px',
+
+              // margin: "0 10px",
               backgroundColor: "#007bff",
               color: "#fff",
               textDecoration: "none",
@@ -72,6 +71,26 @@ export default function GuestHome() {
             }}
           >
             <FaUserTie style={{ marginRight: "10px" }} /> Connexion Validateur
+          </Link>
+        </div>
+        <div className="pt-md-3 ms-lg-2 ms-md-2 ms-sm-0">
+          <Link
+            to="/concepteur/login"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px 20px",
+              margin: "0 10px",
+              backgroundColor: "#007bff",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "5px",
+              border: "2px solid #fff",
+              transition: "background-color 0.3s ease",
+            }}
+          >
+            <FaUser style={{ marginRight: "10px" }} /> Connexion Administrateur
           </Link>
         </div>
       </div>

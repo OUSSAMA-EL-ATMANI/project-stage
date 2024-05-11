@@ -1,8 +1,7 @@
 import React from 'react'
 
-const ConcepteurLogin = () => {
+const AdminLogin = () => {
   return (
-
     <div className='w-100 d-flex flex-column justify-content-center align-items-center' style={{ minHeight: "100vh" }}>
       <div class="card mb-3 w-50">
         <div class="row g-0 d-flex flex-column align-content-center pt-5">
@@ -58,8 +57,7 @@ const ConcepteurLogin = () => {
         </div>
       </div>
     </div>
-
   )
 }
 
-export default ConcepteurLogin
+export default AdminLogin
