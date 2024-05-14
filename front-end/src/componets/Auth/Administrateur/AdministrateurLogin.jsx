@@ -1,6 +1,6 @@
 import React from "react";
 
-const ValidateurLogin = () => {
+const AdministrateurLogin = () => {
   return (
     <div
       className="w-100 d-flex flex-column justify-content-center align-items-center"
@@ -29,7 +29,7 @@ const ValidateurLogin = () => {
                     id="form2Example1"
                     class="form-control"
                     placeholder="ex: exemple@ofppt.ma"
-                    
+                 
                   />
                 </div>
 
@@ -78,4 +78,4 @@ const ValidateurLogin = () => {
   );
 };
 
-export default ValidateurLogin;
+export default AdministrateurLogin;

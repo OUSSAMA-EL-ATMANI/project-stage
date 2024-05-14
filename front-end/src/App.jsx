@@ -6,6 +6,7 @@ import GuestIndex from './layouts/Guest/GuestIndex';
 import GuestHome from './componets/Guest/GuestHome';
 import ConcepteurLogin from './componets/Auth/Concepteur/ConcepteurLogin';
 import ValidateurLogin from './componets/Auth/Validateur/ValidateurLogin';
+import AdministrateurLogin from './componets/Auth/Administrateur/AdministrateurLogin';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
           <Route index element={<GuestHome />} />
           <Route path='concepteur/login' element={<ConcepteurLogin />} />
           <Route path='validateur/login' element={<ValidateurLogin />} />
-          <Route path='admin/login' element={<AdminLogin/>} />
+          <Route path='administrateur/login' element={<AdministrateurLogin/>} />
         </Route>
         <Route path='/concepteur' element={<ConcepteurIndex />}>
         </Route>

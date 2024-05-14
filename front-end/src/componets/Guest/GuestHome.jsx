@@ -70,12 +70,12 @@ export default function GuestHome() {
               transition: "background-color 0.3s ease",
             }}
           >
-            <FaUserTie style={{ marginRight: "10px" }} /> Connexion Validateur
+            <FaUser style={{ marginRight: "10px" }} /> Connexion Validateur
           </Link>
         </div>
         <div className="pt-md-3 ms-lg-2 ms-md-2 ms-sm-0">
           <Link
-            to="/concepteur/login"
+            to="/administrateur/login"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -90,7 +90,7 @@ export default function GuestHome() {
               transition: "background-color 0.3s ease",
             }}
           >
-            <FaUser style={{ marginRight: "10px" }} /> Connexion Administrateur
+            <FaUserTie style={{ marginRight: "10px" }} /> Connexion Administrateur
           </Link>
         </div>
       </div>
