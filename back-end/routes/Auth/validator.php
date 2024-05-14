@@ -9,6 +9,9 @@ Route::middleware(['guest:validator'])->group(function () {
     // forgot password
 });
 Route::middleware(['auth:validator'])->group(function () {
+    Route::get('/profile', function () {
+        return request()->user("validator");
+    });
     // logout
     // new password
     // change email

@@ -9,6 +9,9 @@ Route::middleware(['guest:designer'])->group(function () {
     // forgot password
 });
 Route::middleware(['auth:designer'])->group(function () {
+    Route::get('/profile', function () {
+        return request()->user("designer");
+    });
     // logout
     // new password
     // change email

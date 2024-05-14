@@ -11,7 +11,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Validator extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
-
+    protected $appends = ['role'];
+    public function getRoleAttribute(){
+        return 'validator';
+    }
     /**
      * The attributes that are mass assignable.
      *

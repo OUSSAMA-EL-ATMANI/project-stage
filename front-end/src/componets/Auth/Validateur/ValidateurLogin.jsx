@@ -1,34 +1,18 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../../config/context/ComponentContext";
+
+
 
 const ValidateurLogin = () => {
-
-
-
-  const navigate = useNavigate()
-
-  const [loginInput, setLoginInput] = useState({
-    email: "",
-    password: "",
-    errors: {
-      email: "",
-      password: ""
-    }
-  })
-
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post('http://localhost:8000/api/validator/login', loginInput)
-      localStorage.setItem("token", res.data.token)
-      navigate("/validateur")
-    } catch (error) {
-      setLoginInput({ ...loginInput, errors: error.response.data.errors })
-      console.log(error);
-    }
+const { handleLogin, navigateTo, user } = useAppContext()
+const login = async (e) => { 
+  e.preventDefault()
+  try {
+   await handleLogin({ email: e.target.email.value, password: e.target.password.value }, "validator")
+   
+  } catch (error) {
+    console.log(error);
   }
-
-
+}
   return (
     <div
       className="w-100 d-flex flex-column justify-content-center align-items-center"
@@ -47,7 +31,7 @@ const ValidateurLogin = () => {
           </div>
           <div className="col-lg-8">
             <div className="card-body py-5 px-md-5">
-              <form>
+              <form onSubmit={login}>
                 <div data-mdb-input-init className="form-outline mb-4">
                   <label className="form-label" htmlFor="form2Example1">
                     Email address
@@ -57,10 +41,9 @@ const ValidateurLogin = () => {
                     id="form2Example1"
                     className="form-control"
                     placeholder="ex: exemple@ofppt.ma"
-                    value={loginInput.email}
-                    onChange={(e) => setLoginInput({ ...loginInput, email: e.target.value })}
+                    name="email"
                   />
-                  {loginInput.errors.email && <span>{loginInput.errors.email}</span>}
+                  {/* {loginInput.errors.email && <span>{loginInput.errors.email}</span>} */}
                 </div>
 
                 <div data-mdb-input-init className="form-outline mb-4">
@@ -72,10 +55,9 @@ const ValidateurLogin = () => {
                     id="form2Example2"
                     className="form-control"
                     placeholder="ex: ********"
-                    value={loginInput.password}
-                    onChange={(e) => setLoginInput({ ...loginInput, password: e.target.value })}
+                    name="password"
                   />
-                  {loginInput.errors.password && <span>{loginInput.errors.password}</span>}
+                  {/* {loginInput.errors.password && <span>{loginInput.errors.password}</span>} */}
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center">
@@ -93,11 +75,11 @@ const ValidateurLogin = () => {
 
                   <div>
                     <button
-                      type="button"
+                      type="submit"
                       data-mdb-button-init
                       data-mdb-ripple-init
                       className="btn btn-primary btn-block mb-4"
-                      onClick={handleLogin}
+
                     >
                       Sign in
                     </button>
