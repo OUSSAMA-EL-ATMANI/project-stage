@@ -1,18 +1,25 @@
+import { useState } from "react";
 import { useAppContext } from "../../../config/context/ComponentContext";
 
+const AdministrateurLogin = () => {
+  const [loading, setLoading] = useState(false);
 
-
-const ValidateurLogin = () => {
-const { handleLogin, navigateTo, user } = useAppContext()
-const login = async (e) => { 
-  e.preventDefault()
-  try {
-   await handleLogin({ email: e.target.email.value, password: e.target.password.value }, "validator")
-   
-  } catch (error) {
-    console.log(error);
-  }
-}
+  const { handleLogin, navigateTo, user, errors } = useAppContext();
+  const login = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const state = await handleLogin(
+        { email: e.target.email.value, password: e.target.password.value },
+        "admin"
+      );
+      state && navigateTo("/administrateur", { replace: true });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div
       className="w-100 d-flex flex-column justify-content-center align-items-center"
@@ -34,30 +41,34 @@ const login = async (e) => {
               <form onSubmit={login}>
                 <div data-mdb-input-init className="form-outline mb-4">
                   <label className="form-label" htmlFor="form2Example1">
-                    Email address
+                    Email address <span className="text text-danger">*</span>
                   </label>
                   <input
                     type="email"
                     id="form2Example1"
-                    className="form-control"
+                    className={
+                      "form-control" + (errors?.email ? " is-invalid" : "")
+                    }
                     placeholder="ex: exemple@ofppt.ma"
                     name="email"
                   />
-                  {/* {loginInput.errors.email && <span>{loginInput.errors.email}</span>} */}
+                  <span className="text text-danger">{errors?.email}</span>
                 </div>
 
                 <div data-mdb-input-init className="form-outline mb-4">
                   <label className="form-label" htmlFor="form2Example2">
-                    Password
+                    Password <span className="text text-danger">*</span>
                   </label>
                   <input
                     type="password"
                     id="form2Example2"
-                    className="form-control"
+                    className={
+                      "form-control" + (errors?.password ? " is-invalid" : "")
+                    }
                     placeholder="ex: ********"
                     name="password"
                   />
-                  {/* {loginInput.errors.password && <span>{loginInput.errors.password}</span>} */}
+                  <span className="text text-danger">{errors?.password}</span>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center">
@@ -78,10 +89,10 @@ const login = async (e) => {
                       type="submit"
                       data-mdb-button-init
                       data-mdb-ripple-init
+                      disabled={loading}
                       className="btn btn-primary btn-block mb-4"
-
                     >
-                      Sign in
+                      {loading ? "Loading..." : "Sign in"}
                     </button>
                   </div>
                 </div>
@@ -94,4 +105,4 @@ const login = async (e) => {
   );
 };
 
-export default ValidateurLogin;
+export default AdministrateurLogin;

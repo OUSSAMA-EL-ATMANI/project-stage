@@ -12,6 +12,8 @@ Route::middleware(['auth:validator'])->group(function () {
     Route::get('/profile', function () {
         return request()->user("validator");
     });
+    Route::post('/logout', [ValidatorController::class, 'logout']);
+
     // logout
     // new password
     // change email

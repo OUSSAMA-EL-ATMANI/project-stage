@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'designer'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'designers'),
+        'guard' => env('AUTH_GUARD', 'admin'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'admins'),
     ],
 
     /*
@@ -36,6 +36,10 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'admins',
+        ],
         'designer' => [
             'driver' => 'sanctum',
             'provider' => 'designers',
@@ -64,6 +68,10 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         'designers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Designer::class,
@@ -99,6 +107,12 @@ return [
     */
 
     'passwords' => [
+        'admins' => [
+            'provider' => 'admins',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'designers' => [
             'provider' => 'designers',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),

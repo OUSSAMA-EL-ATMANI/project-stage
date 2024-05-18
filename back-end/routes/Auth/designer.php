@@ -12,6 +12,8 @@ Route::middleware(['auth:designer'])->group(function () {
     Route::get('/profile', function () {
         return request()->user("designer");
     });
+    Route::post('/logout', [DesignerController::class, 'logout']);
+
     // logout
     // new password
     // change email

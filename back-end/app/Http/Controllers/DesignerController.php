@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Designer;
 use App\Models\Question;
-use App\Mail\QuestionMail;
 use App\Models\Validator;
+use App\Mail\QuestionMail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -37,12 +38,19 @@ class DesignerController extends Controller
     }
 
 
+    public function logout()
+    {
+        auth('designer')->user()->tokens()->delete();
+        return response(['message' => 'Deconnexion reussie']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $designers = Designer::all();
+        return response()->json($designers);
     }
 
     /**
@@ -50,11 +58,22 @@ class DesignerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-    public function push(Request $request)
-    {
-        //
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:designers',
+        ]);
+
+        $password = Str::random(8);
+
+        $designer = new Designer();
+        $designer->first_name = $request->first_name;
+        $designer->last_name = $request->last_name;
+        $designer->email = $request->email;
+        $designer->password = Hash::make($password);
+        $designer->save();
+
+        return response()->json(['message' => 'Concepteur cree avec succes', 'password' => $password], 201);
     }
 
     /**
@@ -62,8 +81,37 @@ class DesignerController extends Controller
      */
     public function show(Designer $designer)
     {
-        //
+        return response()->json($designer);
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Designer $designer)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:designers,email,' . $designer->id,
+        ]);
+
+        $designer->first_name = $request->first_name;
+        $designer->last_name = $request->last_name;
+        $designer->email = $request->email;
+        $designer->save();
+
+        return response()->json(['message' => 'Concepteur mis a jour avec succes'], 201);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Designer $designer)
+    {
+        $designer->delete();
+        return response()->json(['message' => 'concepteur a ete supprime avec succes']);
+    }
+
 
     public function sendQuestions(Request $request)
     {
@@ -94,23 +142,5 @@ class DesignerController extends Controller
             Mail::to($validator->email)->send(new QuestionMail(auth('designer')->user(), $question));
         });
         return response(['message' => 'Questions envoyée']);
-    }
-
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Designer $designer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Designer $designer)
-    {
-        //
     }
 }
