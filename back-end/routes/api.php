@@ -22,3 +22,12 @@ Route::group([
         include 'APIs/designer.php';
     });
 });
+
+Route::group([
+    'prefix' => 'admin',
+], function () {
+    include 'Auth/admin.php';
+    Route::middleware(['auth:admin'])->group(function () {
+        include 'APIs/admin.php';
+    });
+});
