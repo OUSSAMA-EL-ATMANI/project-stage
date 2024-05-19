@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import { useAppContext } from "../../config/context/ComponentContext";
 import { axiosClient } from "../../config/Api/AxiosClient";
 
@@ -51,6 +51,22 @@ const AdminIndex = () => {
                   to="/administrateur/validateurs-managment"
                 >
                   Managment Validateurs
+                </NavLink>
+              </li>
+              <li className="nav-item ms-lg-5 ps-lg-2">
+                <NavLink
+                  className="nav-link"
+                  to="/administrateur/filieres-managment"
+                >
+                  Managment Filieres
+                </NavLink>
+              </li>
+              <li className="nav-item ms-lg-5 ps-lg-2">
+                <NavLink
+                  className="nav-link"
+                  to="/administrateur/questions-managment"
+                >
+                  Managment Question
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">

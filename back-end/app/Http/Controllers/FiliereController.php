@@ -10,6 +10,12 @@ class FiliereController extends Controller
     public function index()
     {
         $filieres = Filiere::all();
-        return response()->json(['data' => $filieres], 200);
+        return response()->json($filieres);
+    }
+
+    public function destroy(Filiere $filiere)
+    {
+        $filiere->delete();
+        return response()->json(null, 204);
     }
 }

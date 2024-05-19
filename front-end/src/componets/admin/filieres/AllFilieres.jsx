@@ -1,56 +1,51 @@
 import React, { useEffect } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
-import { Link } from "react-router-dom";
-import CreateDesigner from "../../models/CreateDesigner";
-import UpdateDesigner from "../../models/UpdateDesigner";
 import { useAppContext } from "../../../config/context/ComponentContext";
 
-const AllDesigners = () => {
-  const [designers, setDesigners] = React.useState(null);
+const AllFilieres = () => {
+  const [filieres, setFilieres] = React.useState(null);
   const [deleteLoading, setDeleteLoading] = React.useState(false);
   const { setErrors } = useAppContext();
-  const getAllDesigners = async () => {
+  const getAllFilieres = async () => {
     try {
-      const { data } = await axiosClient.get("admin/designers");
-      setDesigners(data);
+      const { data } = await axiosClient.get("admin/filieres");
+      setFilieres(data);
       setErrors(null);
     } catch (error) {
       console.log(error);
     }
   };
-  const deleteDesigner = async (designer) => {
+  const deleteFiliere = async (filiere) => {
     setDeleteLoading(true);
     document.getElementById(
-      "deleteBtnDesigners" + designer?.id
+      "deleteBtnFiliere" + filiere?.id
     ).disabled = true;
     document.getElementById(
-      "deleteBtnDesigners" + designer?.id
+      "deleteBtnFiliere" + filiere?.id
     ).innerHTML = `<span
     class="spinner-border spinner-border-sm"
     role="status"
     aria-hidden="true"
   ></span>`;
     try {
-      await axiosClient.delete(
-        "admin/designers/" + designer?.id
-      );
-      await getAllDesigners();
+      await axiosClient.delete("admin/filieres/" + filiere?.id);
+      await getAllFilieres();
     } catch (error) {
       console.log(error);
     } finally {
       document.getElementById(
-        "deleteBtnDesigners" + designer?.id
+        "deleteBtnFiliere" + filiere?.id
       ).disabled = false;
       document.getElementById(
-        "deleteBtnDesigners" + designer?.id
+        "deleteBtnFiliere" + filiere?.id
       ).innerHTML = `Supprimer`;
       setDeleteLoading(false);
     }
   };
 
   useEffect(() => {
-    document.title = "Tous les concepteurs - OFPPT";
-    getAllDesigners();
+    document.title = "Tous les validateurs - OFPPT";
+    getAllFilieres();
   }, []);
 
   return (
@@ -59,67 +54,61 @@ const AllDesigners = () => {
         type="button"
         className="btn btn-primary mb-3"
         data-bs-toggle="modal"
-        data-bs-target="#CreateDesigner"
+        data-bs-target="#CreateFiliere"
       >
-        Ajouter une concepteur
+        Ajouter une filiere
       </button>
-      <CreateDesigner
-        targetModel="CreateDesigner"
-        getAllDesigners={getAllDesigners}
-      />
-      {!designers ? (
+      {/* <CreateFiliere
+        targetModel="CreateFiliere"
+        getAllFilieres={getAllFilieres}
+      /> */}
+      {!filieres ? (
         <h1 className="text-center mt-5 pt-5">Chargement...</h1>
       ) : (
         <table className="table">
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Prenom</th>
-              <th>E-mail</th>
+              <th>Description</th>
               <th>Les Actions</th>
             </tr>
           </thead>
           <tbody>
-            {designers?.length > 0 ? (
-              designers?.map((designer, i) => (
+            {filieres?.length > 0 ? (
+              filieres?.map((filiere, i) => (
                 <tr key={i}>
-                  <td>{designer.first_name}</td>
-                  <td>{designer.last_name}</td>
-                  <td>
-                    <Link to={"mailto:" + designer.email}>
-                      {designer.email}
-                    </Link>
-                  </td>
+                  <td>{filiere.nom}</td>
+                  <td>{filiere.description}</td>
                   <td>
                     <div className="d-flex gap-1 flex-nowrap">
                       <button
                         type="button"
                         className="btn btn-success"
                         data-bs-toggle="modal"
-                        data-bs-target={"#UpdateDesigner" + designer.id}
+                        data-bs-target={"#UpdateFiliere" + filiere.id}
                       >
                         Edit
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger"
-                        id={"deleteBtnDesigners" + designer.id}
+                        id={"deleteBtnFiliere" + filiere.id}
                         disabled={deleteLoading}
-                        onClick={() => deleteDesigner(designer)}
+                        onClick={() => deleteFiliere(filiere)}
                       >
                         Supprimer
                       </button>
-                      <UpdateDesigner
-                        targetModel={"UpdateDesigner" + designer.id}
-                        getAllDesigners={getAllDesigners}
-                        designer={designer}
-                      />
+                      {/* <UpdateFiliere
+                        targetModel={"UpdateFiliere" + filiere.id}
+                        getAllFilieres={getAllFilieres}
+                        filiere={filiere}
+                      /> */}
                     </div>
                   </td>
                 </tr>
               ))
             ) : (
-              <h1 className="text-center mt-5 pt-5">Aucun concepteur</h1>
+              <h1 className="text-center mt-5 pt-5">Aucun Validateur</h1>
             )}
           </tbody>
         </table>
@@ -128,4 +117,4 @@ const AllDesigners = () => {
   );
 };
 
-export default AllDesigners;
+export default AllFilieres;

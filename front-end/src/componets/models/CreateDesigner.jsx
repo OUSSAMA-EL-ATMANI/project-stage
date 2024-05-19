@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAppContext } from "../../config/context/ComponentContext";
 import { axiosClient } from "../../config/Api/AxiosClient";
+import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const CreateDesigner = ({ targetModel, getAllDesigners }) => {
   const { setErrors, errors } = useAppContext();
@@ -131,6 +133,11 @@ const CreateDesigner = ({ targetModel, getAllDesigners }) => {
       </div>
     </div>
   );
+};
+
+CreateDesigner.propTypes = {
+  targetModel: PropTypes.string.isRequired,
+  getAllDesigners: PropTypes.func.isRequired,
 };
 
 export default CreateDesigner;
