@@ -89,6 +89,7 @@ class QuestionController extends Controller
         $rules = [
             'questions_id' => 'required|exists:questions,id',
             'points' => 'required|numeric',
+            'commentaire' => 'required',
         ];
 
         $validate = Validator::make(request()->all(), $rules);
@@ -101,19 +102,15 @@ class QuestionController extends Controller
             return response(['message' => 'Questions introuvable'], 404);
         };
         if ($request->points < 80) {
-            $question->is_visible = true;
             $question->is_accepted = false;
-            $question->points = $request->points;
-            $question->save();
-            return response(['message' => 'Exam non acceptée'], 200);
         };
         if ($request->points >= 80) {
-            $question->is_visible = true;
             $question->is_accepted = true;
-            $question->points = $request->points;
-            $question->save();
-            return response(['message' => 'Exam acceptée'], 200);
         };
-        return response(['message' => 'Error Inconnu'], 400);
+        $question->is_visible = true;
+        $question->commentaire = $request->commentaire;
+        $question->points = $request->points;
+        $question->save();
+        return response(['message' => 'Bien Faite'], 200);
     }
 }

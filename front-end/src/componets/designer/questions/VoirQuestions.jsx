@@ -48,6 +48,7 @@ const AddQuestions = () => {
             <th scope="col">Status</th>
             <th scope="col">Points</th>
             <th scope="col">Télécharger</th>
+            <th scope="col">Commentaire</th>
           </tr>
         </thead>
         <tbody>
@@ -60,6 +61,7 @@ const AddQuestions = () => {
               <td>{question.is_visible ? question.is_accepted ? <span style={{ color: "green", fontWeight: 'bold' }}>Accepte</span> : <span style={{ color: "red", fontWeight: 'bold' }}>Refuse</span> : <span style={{ color: "orange", fontWeight: 'bold' }}>En cours</span>}</td>
               <td>{question.points}</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
+              <td>{question.commentaire}</td>
             </tr>
           ))}
         </tbody>

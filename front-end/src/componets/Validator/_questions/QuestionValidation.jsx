@@ -50,9 +50,10 @@ const QuestionValidation = () => {
         totalPoints += 10;
       }
     });
+    const commentaire = e.target.commentaire.value;
 
     try {
-      const { data } = await axiosClient.put(`/validator/validateQuestion/${id}`, { questions_id: id, points: totalPoints });
+      const { data } = await axiosClient.put(`/validator/validateQuestion/${id}`, { questions_id: id, points: totalPoints, commentaire });
       navigateTo("/validator/questionsValidated", { replace: true });
     } catch (error) {
       alert(error.response.data.message);
@@ -61,9 +62,9 @@ const QuestionValidation = () => {
   };
 
   return (
-    <form onSubmit={validateQuestion} className="container mt-5">
+    <form onSubmit={validateQuestion} className="container mt-5 justify-content-center">
       <h2 className="text-center">Évaluation de l'examen: {question?.file_name}</h2>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -75,7 +76,7 @@ const QuestionValidation = () => {
           Clarté des Instructions
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -87,7 +88,7 @@ const QuestionValidation = () => {
           Police et Mise en Page
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -99,7 +100,7 @@ const QuestionValidation = () => {
           Pertinence par Rapport au Contenu du Cours
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -111,7 +112,7 @@ const QuestionValidation = () => {
           Variété des Questions
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -123,7 +124,7 @@ const QuestionValidation = () => {
           Niveau de Difficulté
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -135,7 +136,7 @@ const QuestionValidation = () => {
           Équité
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -147,7 +148,7 @@ const QuestionValidation = () => {
           Organisation Logique
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -159,7 +160,7 @@ const QuestionValidation = () => {
           Adéquation du Temps
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -171,7 +172,7 @@ const QuestionValidation = () => {
           Couverture des Objectifs d'Apprentissage
         </label>
       </div>
-      <div className="form-check">
+      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
             className='form-check-input'
@@ -183,6 +184,8 @@ const QuestionValidation = () => {
           Grille de Notation Claire
         </label>
       </div>
+      <textarea placeholder='Commentaire' className='form-control mt-5 m-auto w-50' name='commentaire'>
+      </textarea>
       <div className="text-center mt-5">
         <button type="submit" className='btn btn-primary'>Soumettre</button>
       </div>
