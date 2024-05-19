@@ -4,25 +4,24 @@ import { axiosClient } from "../../config/Api/AxiosClient";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 
-const UpdateValidator = ({ targetModel, validator, getAllValidators }) => {
+const UpdateFiliere = ({ targetModel, filiere, getAllFilieres }) => {
   const { setErrors, errors } = useAppContext();
   const [loading, setLoading] = useState(false);
   const cancelModel = useRef();
 
-  const UpdateValidator = async (e) => {
+  const UpdateFiliere = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const { first_name, last_name, email } = e.target.elements;
+    const { nom, description } = e.target.elements;
     try {
       const { data } = await axiosClient.put(
-        "admin/validators/" + validator?.id,
+        "admin/filieres/" + filiere?.id,
         {
-          first_name: first_name.value,
-          last_name: last_name.value,
-          email: email.value,
+          nom: nom.value,
+          description: description.value,
         }
       );
-      await getAllValidators();
+      await getAllFilieres();
       cancelModel.current.click();
       Swal.fire({
         // title: ,
@@ -43,14 +42,14 @@ const UpdateValidator = ({ targetModel, validator, getAllValidators }) => {
       className="modal fade"
       id={targetModel}
       tabIndex={-1}
-      aria-labelledby="UpdateValidator"
+      aria-labelledby="UpdateFiliere"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="UpdateValidator">
-              Modifier Une Validateur
+            <h1 className="modal-title fs-5" id="UpdateFiliere">
+              Modifier Une Filière
             </h1>
             <button
               type="button"
@@ -60,7 +59,7 @@ const UpdateValidator = ({ targetModel, validator, getAllValidators }) => {
             />
           </div>
           <div className="modal-body">
-            <form onSubmit={UpdateValidator}>
+            <form onSubmit={UpdateFiliere}>
               <div data-mdb-input-init className="form-outline mb-4">
                 <label className="form-label" htmlFor="form2Example1">
                   Nom <span className="text text-danger">*</span>
@@ -68,45 +67,29 @@ const UpdateValidator = ({ targetModel, validator, getAllValidators }) => {
                 <input
                   type="text"
                   id="form2Example1"
-                  defaultValue={validator?.first_name}
+                  defaultValue={filiere?.nom}
                   className={
-                    "form-control" + (errors?.first_name ? " is-invalid" : "")
+                    "form-control" + (errors?.nom ? " is-invalid" : "")
                   }
-                  name="first_name"
+                  name="nom"
                 />
-                <span className="text text-danger">{errors?.first_name}</span>
+                <span className="text text-danger">{errors?.nom}</span>
               </div>
 
               <div data-mdb-input-init className="form-outline mb-4">
                 <label className="form-label" htmlFor="form2Example2">
-                  Prenom <span className="text text-danger">*</span>
+                  Description <span className="text text-danger">*</span>
                 </label>
                 <input
                   type="text"
                   id="form2Example2"
-                  defaultValue={validator?.last_name}
+                  defaultValue={filiere?.description}
                   className={
-                    "form-control" + (errors?.last_name ? " is-invalid" : "")
+                    "form-control" + (errors?.description ? " is-invalid" : "")
                   }
-                  name="last_name"
+                  name="description"
                 />
-                <span className="text text-danger">{errors?.last_name}</span>
-              </div>
-
-              <div data-mdb-input-init className="form-outline mb-4">
-                <label className="form-label" htmlFor="form2Example2">
-                  E-mail <span className="text text-danger">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="form2Example2"
-                  defaultValue={validator?.email}
-                  className={
-                    "form-control" + (errors?.email ? " is-invalid" : "")
-                  }
-                  name="email"
-                />
-                <span className="text text-danger">{errors?.email}</span>
+                <span className="text text-danger">{errors?.description}</span>
               </div>
 
               <div className="modal-footer">
@@ -142,10 +125,10 @@ const UpdateValidator = ({ targetModel, validator, getAllValidators }) => {
   );
 };
 
-UpdateValidator.propTypes = {
+UpdateFiliere.propTypes = {
   targetModel: PropTypes.string.isRequired,
-  validator: PropTypes.object.isRequired,
-  getAllValidators: PropTypes.func.isRequired,
+  filiere: PropTypes.object.isRequired,
+  getAllFilieres: PropTypes.func.isRequired,
 };
 
-export default UpdateValidator;
+export default UpdateFiliere;

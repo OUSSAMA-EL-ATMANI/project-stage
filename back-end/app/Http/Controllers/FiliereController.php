@@ -30,6 +30,22 @@ class FiliereController extends Controller
         return response()->json(["data" => $filiere, "message" => "Filiere Bien Ajoute"], 201);
     }
 
+    public function update(Request $request, Filiere $filiere)
+    {
+        $rules = [
+            'nom' => 'required',
+            'description' => 'required'
+        ];
+
+        $validate = Validator::make($request->all(), $rules);
+        if ($validate->fails()) {
+            return response()->json($validate->messages(), 400);
+        }
+
+        $filiere->update($request->all());
+        return response()->json(["data" => $filiere, "message" => "Filiere Bien Modifie"], 200);
+    }
+
     public function destroy(Filiere $filiere)
     {
         $filiere->delete();

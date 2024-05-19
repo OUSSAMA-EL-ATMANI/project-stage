@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 import { useAppContext } from "../../../config/context/ComponentContext";
 import CreateFiliere from "../../models/CreateFiliere";
+import UpdateFiliere from "../../models/UpdateFiliere";
 
 const AllFilieres = () => {
   const [filieres, setFilieres] = React.useState(null);
@@ -99,11 +100,11 @@ const AllFilieres = () => {
                       >
                         Supprimer
                       </button>
-                      {/* <UpdateFiliere
+                      <UpdateFiliere
                         targetModel={"UpdateFiliere" + filiere.id}
                         getAllFilieres={getAllFilieres}
                         filiere={filiere}
-                      /> */}
+                      />
                     </div>
                   </td>
                 </tr>
