@@ -1,20 +1,24 @@
-import React, { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../../config/context/ComponentContext";
 import { axiosClient } from "../../config/Api/AxiosClient";
+import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const CreateValidator = ({ targetModel, getAllValidators }) => {
   const { setErrors, errors } = useAppContext();
   const [loading, setLoading] = useState(false);
+  const [filieres, setFilieres] = useState([]);
   const cancelModel = useRef();
   const addValidator = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const { first_name, last_name, email } = e.target.elements;
+    const { first_name, last_name, email, filiere } = e.target.elements;
     try {
       const { data } = await axiosClient.post("admin/validators", {
         first_name: first_name.value,
         last_name: last_name.value,
         email: email.value,
+        filiere_id: filiere.value,
       });
       await getAllValidators();
       cancelModel.current.click();
@@ -31,6 +35,19 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
       setLoading(false);
     }
   };
+
+  const getFilieres = async () => {
+    try {
+      const { data } = await axiosClient.get("/filiere");
+      setFilieres(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getFilieres();
+  }, []);
 
   return (
     <div
@@ -100,6 +117,22 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
                 <span className="text text-danger">{errors?.email}</span>
               </div>
 
+              <div data-mdb-input-init className="form-outline mb-4">
+                <label className="form-label" htmlFor="form2Example2">
+                  Filiere <span className="text text-danger">*</span>
+                </label>
+                <br />
+                <select name="filiere" id="filiere" className="form-select">
+                  <option value="">Selectionner une filiere</option>
+                  {filieres?.map((filiere) => (
+                    <option key={filiere.id} value={filiere.id}>
+                      {filiere.nom}
+                    </option>
+                  ))}
+                </select>
+                <span className="text text-danger">{errors?.filiere_id}</span>
+              </div>
+
               <div className="modal-footer">
                 <button
                   type="button"
@@ -132,5 +165,10 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
     </div>
   );
 };
+
+CreateValidator.propTypes = {
+  targetModel: PropTypes.string.isRequired,
+  getAllValidators: PropTypes.func.isRequired,
+}
 
 export default CreateValidator;

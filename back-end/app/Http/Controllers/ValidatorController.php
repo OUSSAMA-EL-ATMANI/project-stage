@@ -53,6 +53,7 @@ class ValidatorController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email|unique:validators,email',
+            'filiere_id' => 'required',
         ]);
 
         $password = Str::random(8);
