@@ -56,6 +56,7 @@ function App() {
           />
           <Route path="questions-meanagment" element={<AllQuestions />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

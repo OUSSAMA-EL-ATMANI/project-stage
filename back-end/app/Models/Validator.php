@@ -12,9 +12,11 @@ class Validator extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
     protected $appends = ['role'];
-    public function getRoleAttribute(){
+    public function getRoleAttribute()
+    {
         return 'validator';
     }
+    protected $with = ['filiere'];
     /**
      * The attributes that are mass assignable.
      *
@@ -48,5 +50,10 @@ class Validator extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function filiere()
+    {
+        return $this->belongsTo(Filiere::class);
     }
 }

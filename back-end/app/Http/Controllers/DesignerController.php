@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator as ValidatorFunc;
 
 class DesignerController extends Controller
 {
@@ -115,13 +116,27 @@ class DesignerController extends Controller
 
     public function sendQuestions(Request $request)
     {
-        $request->validate([
+        $rules = [
             'file' => 'required|mimes:csv,txt,pdf,doc|max:5000',
-        ]);
+            'file_name' => 'required',
+            'description' => 'required',
+            'filiere_id' => 'required',
+        ];
+
+        $data = $request->all();
+
+        $validator = ValidatorFunc::make($data, $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->messages()
+            ]);
+        }
 
         // Save file
         $uploadedFile = $request->file('file');
-        $fileName = $uploadedFile->getClientOriginalName();
+        $fileName = time();
         $fileExtension = $uploadedFile->extension();
         $filePath = $fileName . '.' . $fileExtension;
 
@@ -136,11 +151,14 @@ class DesignerController extends Controller
         // Save question with file name
         $question = new Question();
         $question->file_path = $filePath; // Set file path here
+        $question->file_name = $request->file_name;
+        $question->description = $request->description;
+        $question->filiere_id = $request->filiere_id;
         $question->designer_id = auth('designer')->user()->id;
         $question->save();
-        Validator::each(function ($validator) use ($question) {
-            Mail::to($validator->email)->send(new QuestionMail(auth('designer')->user(), $question));
-        });
+        // Validator::each(function ($validator) use ($question) {
+        //     Mail::to($validator->email)->send(new QuestionMail(auth('designer')->user(), $question));
+        // });
         return response(['message' => 'Questions envoyée']);
     }
 }

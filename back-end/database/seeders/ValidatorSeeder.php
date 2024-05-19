@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Filiere;
 use App\Models\Validator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,7 @@ class ValidatorSeeder extends Seeder
             'first_name' => 'Oussama',
             'last_name' => 'Othmani',
             'email' => 'validator@ofppt.com',
+            'filiere_id' => Filiere::all()->random()->id,
             'password' => Hash::make('ofppt'),
         ]);
     }

@@ -31,9 +31,7 @@ const AllValidators = () => {
     aria-hidden="true"
   ></span>`;
     try {
-      const { data } = await axiosClient.delete(
-        "admin/validators/" + validator?.id
-      );
+      await axiosClient.delete( "admin/validators/" + validator?.id );
       await getAllValidators();
     } catch (error) {
       console.log(error);
@@ -76,6 +74,7 @@ const AllValidators = () => {
               <th>Nom</th>
               <th>Prenom</th>
               <th>E-mail</th>
+              <th>Filiere</th>
               <th>Les Actions</th>
             </tr>
           </thead>
@@ -90,6 +89,7 @@ const AllValidators = () => {
                       {validator.email}
                     </Link>
                   </td>
+                  <td>{validator.filiere.nom}</td>
                   <td>
                     <div className="d-flex gap-1 flex-nowrap">
                       <button

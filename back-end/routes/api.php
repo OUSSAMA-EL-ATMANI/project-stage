@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\FiliereController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -31,3 +31,6 @@ Route::group([
         include 'APIs/admin.php';
     });
 });
+
+
+Route::get('/filiere',[FiliereController::class,'index']);
