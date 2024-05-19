@@ -10,8 +10,14 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $with = ['filiere'];
+
     public function designer()
     {
         return $this->belongsTo(Designer::class);
+    }
+
+    public function filiere(){
+        return $this->belongsTo(Filiere::class);
     }
 }

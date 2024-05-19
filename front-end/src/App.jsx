@@ -6,6 +6,7 @@ import GuestHome from "./componets/Guest/GuestHome";
 import AllDesigners from "./componets/admin/_designers/AllDesigners";
 import AllValidators from "./componets/admin/_validators/AllValidators";
 import AddQuestions from "./componets/designer/questions/AddQuestions";
+import VoirQuestions from "./componets/designer/questions/VoirQuestions";
 import AllQuestions from "./componets/Validator/_questions/AllQuestions";
 
 // Auth Components
@@ -47,6 +48,7 @@ function App() {
             element={<Navigate to={"/concepteur/ajouter-questions"} />}
           />
           <Route path="ajouter-questions" element={<AddQuestions />} />
+          <Route path="voir-questions" element={<VoirQuestions />} />
         </Route>
 
         <Route path="/validateur" element={<ValidateurIndex />}>

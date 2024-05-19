@@ -37,10 +37,7 @@ const AddQuestions = () => {
         setErrors(data.errors);
         return
       }
-      if (data.status === 200) {
-        setErrors(null);
-        navigateTo("/designer/voir-questions", { replace: true });
-      }
+      navigateTo("/concepteur/voir-questions", { replace: true });
       alert(data.message);
     } catch (error) {
       setErrors(error.data.errors);
@@ -51,7 +48,8 @@ const AddQuestions = () => {
 
 
   return (
-    <div className="row g-3">
+    <div className="row g-3 w-50 m-auto">
+      <h1 className="text-center">Ajouter Question</h1>
       <form onSubmit={uploadFile} encType="multipart/form-data">
         <div data-mdb-input-init className="form-outline mb-4">
           <label className="form-label" htmlFor="form2Example1">
@@ -105,10 +103,11 @@ const AddQuestions = () => {
           <label className="form-label" htmlFor="form2Example1">
             Filiere <span className="text text-danger">*</span>
           </label>
-          <select name="filiere_id" id="filiere_id">
-           {filieres?.map((filiere) => (
-             <option key={filiere.id} value={filiere.id}>{filiere.nom}</option>
-           ))}
+          <br />
+          <select name="filiere_id" id="filiere_id" className="form-select">
+            {filieres?.map((filiere) => (
+              <option key={filiere.id} value={filiere.id}>{filiere.nom}</option>
+            ))}
           </select>
           <span className="text text-danger">{errors?.filiere_id}</span>
         </div>

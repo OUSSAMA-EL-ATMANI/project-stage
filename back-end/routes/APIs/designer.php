@@ -7,4 +7,6 @@ use App\Http\Controllers\ValidatorController;
 
 Route::middleware(['auth:designer'])->group(function () {
     Route::post('/upload-questions', [DesignerController::class, 'sendQuestions']);
+    Route::get('/get-questions', [DesignerController::class, 'getQuestions']);
+    Route::get('/download-questions/{id}', [DesignerController::class, 'downloadQuestions']);
 });

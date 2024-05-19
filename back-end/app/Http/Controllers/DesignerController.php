@@ -161,4 +161,35 @@ class DesignerController extends Controller
         // });
         return response(['message' => 'Questions envoyée']);
     }
+
+
+    public function getQuestions()
+    {
+        $questions = Question::where('designer_id', auth('designer')->user()->id)->get();
+        return response()->json($questions);
+    }
+
+    public function downloadQuestions($id)
+    {
+        $question = Question::find($id);
+        if ($question) {
+            $fileName = $question->file_path;
+            $filePath = storage_path('app/public/' . $fileName);
+
+            if (!file_exists($filePath)) {
+                return response()->json([
+                    "status" => 404,
+                    "message" => "cette question n'a pas une pdf"
+                ]);
+            }
+
+            $namePdf = 'Exam_' . $question->file_name . '.pdf';
+            return response()->download($filePath, $namePdf);
+        } else {
+            return response()->json([
+                "status" => 404,
+                "message" => "question non trouvé"
+            ]);
+        }
+    }
 }

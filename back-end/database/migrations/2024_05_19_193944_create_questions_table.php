@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('file_name');
             $table->string('description');
             $table->string('file_path');
+            $table->boolean('is_visible')->default(0);
             $table->boolean('is_accepted')->default(0);
             $table->foreignId('filiere_id')->constrained('filieres')->cascadeOnDelete();
             $table->foreignId('designer_id')->constrained('designers')->cascadeOnDelete();
