@@ -42,7 +42,7 @@ const AdminIndex = () => {
                   className="nav-link"
                   to="/administrateur/concepteurs-managment"
                 >
-                  Managment Concepteurs
+                  Management Concepteurs
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">
@@ -50,7 +50,7 @@ const AdminIndex = () => {
                   className="nav-link"
                   to="/administrateur/validateurs-managment"
                 >
-                  Managment Validateurs
+                  Management Validateurs
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">
@@ -58,7 +58,7 @@ const AdminIndex = () => {
                   className="nav-link"
                   to="/administrateur/filieres-managment"
                 >
-                  Managment Filieres
+                  Management Filieres
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">
@@ -66,7 +66,7 @@ const AdminIndex = () => {
                   className="nav-link"
                   to="/administrateur/questions-managment"
                 >
-                  Managment Question
+                  Management Exam
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">

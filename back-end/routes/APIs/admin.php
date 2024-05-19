@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/filieres', [FiliereController::class, 'index']);
+    Route::post('/filieres', [FiliereController::class, 'store']);
+    Route::put('/filieres/{filiere}', [FiliereController::class, 'update']);
     Route::delete('/filieres/{filiere}', [FiliereController::class, 'destroy']);
     Route::get('/get-questions', [QuestionController::class, 'getAdminQuestions']);
     Route::get('/download-questions/{id}', [QuestionController::class, 'downloadQuestions']);

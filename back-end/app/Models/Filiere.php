@@ -9,6 +9,11 @@ class Filiere extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nom',
+        'description'
+    ];
+
     /**
      * Get the questions that belong to the filiere.
      */

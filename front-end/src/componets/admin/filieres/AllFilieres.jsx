@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 import { useAppContext } from "../../../config/context/ComponentContext";
+import CreateFiliere from "../../models/CreateFiliere";
 
 const AllFilieres = () => {
   const [filieres, setFilieres] = React.useState(null);
@@ -58,10 +59,10 @@ const AllFilieres = () => {
       >
         Ajouter une filiere
       </button>
-      {/* <CreateFiliere
+      <CreateFiliere
         targetModel="CreateFiliere"
         getAllFilieres={getAllFilieres}
-      /> */}
+      />
       {!filieres ? (
         <h1 className="text-center mt-5 pt-5">Chargement...</h1>
       ) : (
