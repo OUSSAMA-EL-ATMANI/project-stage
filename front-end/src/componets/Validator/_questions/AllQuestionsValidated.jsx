@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 
-const AllQuestions = () => {
+const AllQuestionsValidated = () => {
 
   const [questions, setQuestions] = useState([]);
 
@@ -25,7 +25,7 @@ const AllQuestions = () => {
 
   const getQuestions = async () => {
     try {
-      const { data } = await axiosClient.get("/validator/questionsToValidate");
+      const { data } = await axiosClient.get("/validator/questionsValidated");
       setQuestions(data);
     } catch (error) {
       console.log(error);
@@ -45,6 +45,7 @@ const AllQuestions = () => {
             <th scope="col">Question</th>
             <th scope="col">Description</th>
             <th scope="col">Filiere</th>
+            <th scope="col">Status</th>
             <th scope="col">Télécharger</th>
           </tr>
         </thead>
@@ -55,6 +56,7 @@ const AllQuestions = () => {
               <td>{question.file_name}</td>
               <td>{question.description}</td>
               <td>{question.filiere.nom}</td>
+              <td>{question.is_visible ? question.is_accepted ? <span style={{ color: "green", fontWeight: 'bold' }}>Accepte</span> : <span style={{ color: "red", fontWeight: 'bold' }}>Refuse</span> : <span style={{ color: "orange", fontWeight: 'bold' }}>En cours</span>}</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
             </tr>
           ))}
@@ -64,4 +66,4 @@ const AllQuestions = () => {
   );
 };
 
-export default AllQuestions;
+export default AllQuestionsValidated;
