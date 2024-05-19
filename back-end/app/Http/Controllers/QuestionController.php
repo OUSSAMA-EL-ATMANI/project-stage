@@ -111,6 +111,6 @@ class QuestionController extends Controller
         $question->commentaire = $request->commentaire;
         $question->points = $request->points;
         $question->save();
-        return response(['message' => 'Bien Faite'], 200);
+        return response(['message' => 'Bien Valide'], 200);
     }
 }

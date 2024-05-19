@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { axiosClient } from '../../../config/Api/AxiosClient';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const QuestionValidation = () => {
 
   const { id } = useParams();
   const [question, setQuestion] = useState({});
   const navigateTo = useNavigate();
+  const [errors, setErrors] = useState({});
 
   const getQuestion = async () => {
     try {
@@ -54,16 +56,19 @@ const QuestionValidation = () => {
 
     try {
       const { data } = await axiosClient.put(`/validator/validateQuestion/${id}`, { questions_id: id, points: totalPoints, commentaire });
+      Swal.fire({
+        text: data.message,
+        icon: "success",
+      })
       navigateTo("/validator/questionsValidated", { replace: true });
     } catch (error) {
-      alert(error.response.data.message);
-      console.log(error);
+      setErrors(error.response.data);
     }
   };
 
   return (
     <form onSubmit={validateQuestion} className="container mt-5 justify-content-center">
-      <h2 className="text-center">Évaluation de l'examen: {question?.file_name}</h2>
+      <h2 className="text-center">Évaluation de l&apos;examen: {question?.file_name}</h2>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
@@ -169,7 +174,7 @@ const QuestionValidation = () => {
             checked={criteria.couvertureObjectifsApprentissage}
             onChange={handleChange}
           />
-          Couverture des Objectifs d'Apprentissage
+          Couverture des Objectifs d&apos;Apprentissage
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -184,8 +189,8 @@ const QuestionValidation = () => {
           Grille de Notation Claire
         </label>
       </div>
-      <textarea placeholder='Commentaire' className='form-control mt-5 m-auto w-50' name='commentaire'>
-      </textarea>
+      <textarea placeholder='Commentaire' className='form-control mt-5 m-auto w-50' name='commentaire'></textarea>
+      <div className='text text-danger text-center m-auto'>{errors?.commentaire}</div>
       <div className="text-center mt-5">
         <button type="submit" className='btn btn-primary'>Soumettre</button>
       </div>

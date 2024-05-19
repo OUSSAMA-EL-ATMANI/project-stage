@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddQuestions = () => {
   const [loading, setLoading] = useState(false);
@@ -38,7 +39,10 @@ const AddQuestions = () => {
         return
       }
       navigateTo("/concepteur/voir-questions", { replace: true });
-      alert(data.message);
+      Swal.fire({
+        text: data.message,
+        icon: "success",
+      })
     } catch (error) {
       setErrors(error.data.errors);
     } finally {
