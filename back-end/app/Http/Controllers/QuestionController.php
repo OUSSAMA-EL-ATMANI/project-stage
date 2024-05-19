@@ -103,12 +103,14 @@ class QuestionController extends Controller
         if ($request->points < 80) {
             $question->is_visible = true;
             $question->is_accepted = false;
+            $question->points = $request->points;
             $question->save();
-            return response(['message' => 'Exam non acceptée'], 400);
+            return response(['message' => 'Exam non acceptée'], 200);
         };
         if ($request->points >= 80) {
             $question->is_visible = true;
             $question->is_accepted = true;
+            $question->points = $request->points;
             $question->save();
             return response(['message' => 'Exam acceptée'], 200);
         };
