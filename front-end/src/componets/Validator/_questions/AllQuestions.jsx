@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
+import { Link } from "react-router-dom";
 
 const AllQuestions = () => {
 
@@ -46,6 +47,7 @@ const AllQuestions = () => {
             <th scope="col">Description</th>
             <th scope="col">Filiere</th>
             <th scope="col">Télécharger</th>
+            <th scope="col">Valider</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +58,7 @@ const AllQuestions = () => {
               <td>{question.description}</td>
               <td>{question.filiere.nom}</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
+              <td><Link to={`/validateur/questions-meanagment/${question.id}`} className="btn btn-success">Valider</Link></td>
             </tr>
           ))}
         </tbody>

@@ -20,6 +20,7 @@ import ConcepteurIndex from "./layouts/designer/ConcepteurIndex";
 import ValidateurIndex from "./layouts/Validator/ValidateurIndex";
 import AdminIndex from "./layouts/admin/AdminIndex";
 import AllQuestionsValidated from "./componets/Validator/_questions/AllQuestionsValidated";
+import QuestionValidation from "./componets/Validator/_questions/QuestionValidation";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             element={<Navigate to={"/validateur/questions-meanagment"} />}
           />
           <Route path="questions-meanagment" element={<AllQuestions />} />
+          <Route path="questions-meanagment/:id" element={<QuestionValidation />} />
           <Route path="questions-validated" element={<AllQuestionsValidated />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

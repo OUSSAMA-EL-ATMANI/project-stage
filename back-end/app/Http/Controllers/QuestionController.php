@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Mail\IsQuestions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -30,7 +31,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return $question;
     }
 
     /**
@@ -79,5 +80,38 @@ class QuestionController extends Controller
         $question->save();
 
         Mail::to($question->designer->email)->send(new IsQuestions($question, false));
+    }
+
+
+
+    public function validateQuestion()
+    {
+        $rules = [
+            'questions_id' => 'required|exists:questions,id',
+            'points' => 'required|numeric',
+        ];
+
+        $validate = Validator::make(request()->all(), $rules);
+        if ($validate->fails()) return response($validate->errors(), 400);
+
+        $request = request();
+
+        $question = Question::find($request->questions_id);
+        if (!$question) {
+            return response(['message' => 'Questions introuvable'], 404);
+        };
+        if ($request->points < 80) {
+            $question->is_visible = true;
+            $question->is_accepted = false;
+            $question->save();
+            return response(['message' => 'Exam non acceptée'], 400);
+        };
+        if ($request->points >= 80) {
+            $question->is_visible = true;
+            $question->is_accepted = true;
+            $question->save();
+            return response(['message' => 'Exam acceptée'], 200);
+        };
+        return response(['message' => 'Error Inconnu'], 400);
     }
 }
