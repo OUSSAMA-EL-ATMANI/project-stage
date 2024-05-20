@@ -2,26 +2,28 @@ import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 
 const AllQuestionsValidated = () => {
-
   const [questions, setQuestions] = useState([]);
 
   const downloadQuestion = async (question) => {
     try {
-      const res = await axiosClient.get(`/validator/download-questions/${question.id}`, {
-        responseType: 'blob',
-      });
+      const res = await axiosClient.get(
+        `/validator/download-questions/${question.id}`,
+        {
+          responseType: "blob",
+        }
+      );
       const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      const pdfName = 'Exam_' + question?.file_name + '.pdf';
-      link.setAttribute('download', pdfName);
+      const pdfName = "Exam_" + question?.file_name + ".pdf";
+      link.setAttribute("download", pdfName);
       document.body.appendChild(link);
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const getQuestions = async () => {
     try {
@@ -37,7 +39,7 @@ const AllQuestionsValidated = () => {
   }, []);
 
   return (
-    <div className="w-100 d-flex flex-column justify-content-center align-items-center" >
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center container mt-5 pt-5">
       <table className="table table-striped">
         <thead>
           <tr>
@@ -57,9 +59,32 @@ const AllQuestionsValidated = () => {
               <td>{question.file_name}</td>
               <td>{question.description}</td>
               <td>{question.filiere.nom}</td>
-              <td>{question.is_visible ? question.is_accepted ? <span style={{ color: "green", fontWeight: 'bold' }}>Accepte</span> : <span style={{ color: "red", fontWeight: 'bold' }}>Refuse</span> : <span style={{ color: "orange", fontWeight: 'bold' }}>En cours</span>}</td>
+              <td>
+                {question.is_visible ? (
+                  question.is_accepted ? (
+                    <span style={{ color: "green", fontWeight: "bold" }}>
+                      Accepte
+                    </span>
+                  ) : (
+                    <span style={{ color: "red", fontWeight: "bold" }}>
+                      Refuse
+                    </span>
+                  )
+                ) : (
+                  <span style={{ color: "orange", fontWeight: "bold" }}>
+                    En cours
+                  </span>
+                )}
+              </td>
               <td>{question.points}</td>
-              <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
+              <td>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => downloadQuestion(question)}
+                >
+                  Télécharger
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
