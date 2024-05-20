@@ -3,26 +3,28 @@ import { axiosClient } from "../../../config/Api/AxiosClient";
 import { Link } from "react-router-dom";
 
 const AllQuestions = () => {
-
   const [questions, setQuestions] = useState([]);
 
   const downloadQuestion = async (question) => {
     try {
-      const res = await axiosClient.get(`/validator/download-questions/${question.id}`, {
-        responseType: 'blob',
-      });
+      const res = await axiosClient.get(
+        `/validator/download-questions/${question.id}`,
+        {
+          responseType: "blob",
+        }
+      );
       const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      const pdfName = 'Exam_' + question?.file_name + '.pdf';
-      link.setAttribute('download', pdfName);
+      const pdfName = "Exam_" + question?.file_name + ".pdf";
+      link.setAttribute("download", pdfName);
       document.body.appendChild(link);
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const getQuestions = async () => {
     try {
@@ -38,7 +40,7 @@ const AllQuestions = () => {
   }, []);
 
   return (
-    <div className="w-100 d-flex flex-column justify-content-center align-items-center" >
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center  container mt-5 pt-5">
       <table className="table table-striped">
         <thead>
           <tr>
@@ -57,8 +59,22 @@ const AllQuestions = () => {
               <td>{question.file_name}</td>
               <td>{question.description}</td>
               <td>{question.filiere.nom}</td>
-              <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
-              <td><Link to={`/validateur/questions-meanagment/${question.id}`} className="btn btn-success">Valider</Link></td>
+              <td>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => downloadQuestion(question)}
+                >
+                  Télécharger
+                </button>
+              </td>
+              <td>
+                <Link
+                  to={`/validateur/questions-meanagment/${question.id}`}
+                  className="btn btn-success"
+                >
+                  Valider
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
