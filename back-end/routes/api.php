@@ -33,4 +33,4 @@ Route::group([
 });
 
 
-Route::get('/filiere',[FiliereController::class,'index']);
+Route::get('/filiere', [FiliereController::class, 'index']);

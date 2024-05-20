@@ -18,10 +18,14 @@ const ComponentContext = ({ children }) => {
   useEffect(() => {
     async function fetchUser() {
       setLoading(true);
-      const state = await getUser();
-      if (!state) {
-        localStorage.removeItem("ud");
-        navigate("/", { replace: true });
+      if (JSON.parse(localStorage.getItem("ud"))) {
+        const state = await getUser(
+          JSON.parse(localStorage.getItem("ud")).role
+        );
+        if (!state) {
+          localStorage.removeItem("ud");
+          navigate("/", { replace: true });
+        }
       }
       setLoading(false);
     }
