@@ -16,7 +16,7 @@ const AddQuestions = () => {
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement("a");
       link.href = url;
-      const pdfName = "Exam_" + question?.file_name + ".pdf";
+      const pdfName = "Exam_" + question?.file_path ;
       link.setAttribute("download", pdfName);
       document.body.appendChild(link);
       link.click();

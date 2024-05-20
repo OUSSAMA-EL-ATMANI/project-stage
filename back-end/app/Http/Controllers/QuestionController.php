@@ -135,7 +135,7 @@ class QuestionController extends Controller
             }
 
             $namePdf = 'Exam_' . $question->file_name . '.pdf';
-            return response()->download($filePath, $namePdf);
+            return response()->download($filePath, $namePdf); 
         } else {
             return response()->json([
                 "status" => 404,

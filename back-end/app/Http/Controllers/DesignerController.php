@@ -117,7 +117,7 @@ class DesignerController extends Controller
     public function sendQuestions(Request $request)
     {
         $rules = [
-            'file' => 'required|mimes:csv,txt,pdf,doc|max:5000',
+            'file' => 'required|mimes:csv,txt,pdf,doc,docx,xls,xlsx,jpeg,png,jpg,svg|max:50000',
             'file_name' => 'required',
             'description' => 'required',
             'filiere_id' => 'required',

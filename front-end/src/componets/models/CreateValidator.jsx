@@ -39,7 +39,7 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
   const getFilieres = async () => {
     try {
       const { data } = await axiosClient.get("/filiere");
-      setFilieres(data.data);
+      setFilieres(data);
     } catch (error) {
       console.log(error);
     }
