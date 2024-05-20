@@ -14,24 +14,36 @@ class FiliereSeeder extends Seeder
      */
     public function run(): void
     {
-        Filiere::create([
-            'nom' => 'Informatique',
-            'description' => 'Informatique',
-        ]);
 
-        Filiere::create([
-            'nom' => 'Electrique',
-            'description' => 'Electrique',
-        ]);
 
-        Filiere::create([
-            'nom' => 'Electronique',
-            'description' => 'Electronique',
-        ]);
 
-        Filiere::create([
-            'nom' => 'Electrotechnique',
-            'description' => 'Electrotechnique',
-        ]);
+        $filiers = [
+            [
+                'nom' => 'Informatique',
+                'description' => 'Informatique',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nom' => 'Electrique',
+                'description' => 'Electrique',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nom' => 'Electronique',
+                'description' => 'Electronique',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nom' => 'Electrotechnique',
+                'description' => 'Electrotechnique',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ];
+
+        Filiere::insert($filiers);
     }
 }

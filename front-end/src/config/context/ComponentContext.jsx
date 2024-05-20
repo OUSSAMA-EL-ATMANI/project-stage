@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosClient } from "../Api/AxiosClient";
 const Context = createContext({
@@ -11,8 +11,22 @@ const Context = createContext({
 
 const ComponentContext = ({ children }) => {
   const [user, setUser] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
   const [errors, setErrors] = React.useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchUser() {
+      setLoading(true);
+      const state = await getUser();
+      if (!state) {
+        localStorage.removeItem("ud");
+        navigate("/", { replace: true });
+      }
+      setLoading(false);
+    }
+    fetchUser();
+  }, []);
 
   const getUser = async (guard) => {
     const ud = JSON.parse(localStorage.getItem("ud"));
@@ -49,9 +63,15 @@ const ComponentContext = ({ children }) => {
   };
   return (
     <Context.Provider
-      value={{ user, handleLogin, navigateTo: navigate, errors, setErrors }}
+      value={{
+        user,
+        handleLogin,
+        navigateTo: navigate,
+        errors,
+        setErrors,
+      }}
     >
-      {children}
+      {loading ? "Loading..." : children}
     </Context.Provider>
   );
 };
