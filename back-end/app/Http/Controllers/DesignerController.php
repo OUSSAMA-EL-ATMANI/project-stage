@@ -65,7 +65,7 @@ class DesignerController extends Controller
             'email' => 'required|string|email|max:255|unique:designers',
         ]);
 
-        $password = Str::random(8);
+        $password = "ofppt";
 
         $designer = new Designer();
         $designer->first_name = $request->first_name;

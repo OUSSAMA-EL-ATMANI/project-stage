@@ -56,7 +56,7 @@ class ValidatorController extends Controller
             'secteur_id' => 'required',
         ]);
 
-        $password = Str::random(8);
+        $password = 'ofppt';
 
         $validator = new Validator();
         $validator->fill($request->all());
