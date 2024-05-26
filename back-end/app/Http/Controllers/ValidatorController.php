@@ -53,7 +53,7 @@ class ValidatorController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email|unique:validators,email',
-            'filiere_id' => 'required',
+            'secteur_id' => 'required',
         ]);
 
         $password = Str::random(8);
@@ -97,14 +97,14 @@ class ValidatorController extends Controller
     public function questionsToValidate()
     {
         $validator = auth('validator')->user();
-        $questions = Question::where('filiere_id', $validator->filiere_id)->where('is_visible', false)->get();
+        $questions = Question::where('secteur_id', $validator->secteur_id)->where('is_visible', false)->get();
         return response()->json($questions, 200);
     }
 
     public function questionsValidated()
     {
         $validator = auth('validator')->user();
-        $questions = Question::where('filiere_id', $validator->filiere_id)->where('is_visible', true)->get();
+        $questions = Question::where('secteur_id', $validator->secteur_id)->where('is_visible', true)->get();
         return response()->json($questions, 200);
     }
 

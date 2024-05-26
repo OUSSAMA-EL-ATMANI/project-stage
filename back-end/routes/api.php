@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\SecteurController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -34,3 +35,4 @@ Route::group([
 
 
 Route::get('/filiere', [FiliereController::class, 'index']);
+Route::get('/secteur', [SecteurController::class, 'index']);

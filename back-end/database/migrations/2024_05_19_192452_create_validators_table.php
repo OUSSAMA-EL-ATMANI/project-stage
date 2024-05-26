@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('filiere_id')->constrained('filieres')->cascadeOnDelete();
+            $table->foreignId('secteur_id')->constrained('secteurs')->cascadeOnDelete();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

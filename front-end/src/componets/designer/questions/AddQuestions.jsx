@@ -8,12 +8,12 @@ const AddQuestions = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const navigateTo = useNavigate();
-  const [filieres, setFilieres] = useState([]);
+  const [secteurs, setSecteurs] = useState([]);
 
-  const getFilieres = async () => {
+  const getSecteurs = async () => {
     try {
-      const { data } = await axiosClient.get("/filiere");
-      setFilieres(data);
+      const { data } = await axiosClient.get("/secteur");
+      setSecteurs(data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -21,7 +21,7 @@ const AddQuestions = () => {
     }
   };
   useEffect(() => {
-    getFilieres();
+    getSecteurs();
   }, []);
 
   const uploadFile = async (e) => {
@@ -32,7 +32,7 @@ const AddQuestions = () => {
     formData.append("file", e.target.file.files[0]);
     formData.append("file_name", e.target.file_name.value);
     formData.append("description", e.target.description.value);
-    formData.append("filiere_id", e.target.filiere_id.value);
+    formData.append("secteur_id", e.target.secteur_id.value);
     try {
       const { data } = await axiosClient.post(
         "/designer/upload-questions",
@@ -108,17 +108,17 @@ const AddQuestions = () => {
 
           <div data-mdb-input-init className="form-outline mb-4">
             <label className="form-label" htmlFor="form2Example1">
-              Filiere <span className="text text-danger">*</span>
+              Secteur <span className="text text-danger">*</span>
             </label>
             <br />
-            <select name="filiere_id" id="filiere_id" className="form-select">
-              {filieres?.map((filiere) => (
-                <option key={filiere.id} value={filiere.id}>
-                  {filiere.nom}
+            <select name="secteur_id" id="secteur_id" className="form-select">
+              {secteurs?.map((secteur) => (
+                <option key={secteur.id} value={secteur.id}>
+                  {secteur.nom}
                 </option>
               ))}
             </select>
-            <span className="text text-danger">{errors?.filiere_id}</span>
+            <span className="text text-danger">{errors?.secteur_id}</span>
           </div>
 
           <div className="d-flex justify-content-center align-items-center">

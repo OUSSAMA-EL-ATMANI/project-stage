@@ -7,7 +7,7 @@ const AddAminQuestions = () => {
 
   const downloadQuestion = async (question) => {
     try {
-      const res = await axiosClient.get(`/admin/download-questions/${question.id}`, {
+      const res = await axiosClient.get(`/admin/download-questions/${question?.id}`, {
         responseType: 'blob',
       });
       const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -44,7 +44,8 @@ const AddAminQuestions = () => {
             <th scope="col">#</th>
             <th scope="col">Question</th>
             <th scope="col">Description</th>
-            <th scope="col">Filiere</th>
+            <th scope="col">Concepteur</th>
+            <th scope="col">Secteur</th>
             <th scope="col">Status</th>
             <th scope="col">Points</th>
             <th scope="col">Télécharger</th>
@@ -55,13 +56,14 @@ const AddAminQuestions = () => {
           {questions.map((question, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{question.file_name}</td>
-              <td>{question.description}</td>
-              <td>{question.filiere.nom}</td>
-              <td>{question.is_visible ? question.is_accepted ? <span style={{ color: "green", fontWeight: 'bold' }}>Accepte</span> : <span style={{ color: "red", fontWeight: 'bold' }}>Refuse</span> : <span style={{ color: "orange", fontWeight: 'bold' }}>En cours</span>}</td>
-              <td>{question.points}/90</td>
+              <td>{question?.file_name}</td>
+              <td>{question?.description}</td>
+              <td>{question?.designer?.first_name} {question?.designer?.last_name}</td>
+              <td>{question?.secteur?.nom}</td>
+              <td>{question?.is_visible ? question?.is_accepted ? <span style={{ color: "green", fontWeight: 'bold' }}>Accepte</span> : <span style={{ color: "red", fontWeight: 'bold' }}>Refuse</span> : <span style={{ color: "orange", fontWeight: 'bold' }}>En cours</span>}</td>
+              <td>{question?.points}/90</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
-              <td>{question.commentaire}</td>
+              <td>{question?.commentaire}</td>
             </tr>
           ))}
         </tbody>

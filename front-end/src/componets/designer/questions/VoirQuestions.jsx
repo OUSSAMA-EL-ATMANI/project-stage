@@ -51,7 +51,7 @@ const AddQuestions = () => {
                 <th scope="col">#</th>
                 <th scope="col">Question</th>
                 <th scope="col">Description</th>
-                <th scope="col">Filiere</th>
+                <th scope="col">Secteur</th>
                 <th scope="col">Status</th>
                 <th scope="col">Points</th>
                 <th scope="col">Télécharger</th>
@@ -64,7 +64,7 @@ const AddQuestions = () => {
                   <th scope="row">{index + 1}</th>
                   <td>{question.file_name}</td>
                   <td>{question.description}</td>
-                  <td>{question.filiere.nom}</td>
+                  <td>{question.secteur.nom}</td>
                   <td>
                     {question.is_visible ? (
                       question.is_accepted ? (

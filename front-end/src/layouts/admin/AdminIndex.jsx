@@ -56,9 +56,9 @@ const AdminIndex = () => {
               <li className="nav-item ms-lg-5 ps-lg-2">
                 <NavLink
                   className="nav-link"
-                  to="/administrateur/filieres-managment"
+                  to="/administrateur/secteurs-managment"
                 >
-                  Management Filieres
+                  Management Secteurs
                 </NavLink>
               </li>
               <li className="nav-item ms-lg-5 ps-lg-2">

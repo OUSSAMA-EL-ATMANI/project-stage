@@ -16,7 +16,7 @@ class Validator extends Authenticatable
     {
         return 'validator';
     }
-    protected $with = ['filiere'];
+    protected $with = ['secteur'];
     /**
      * The attributes that are mass assignable.
      *
@@ -27,7 +27,7 @@ class Validator extends Authenticatable
         'last_name',
         'email',
         'password',
-        'filiere_id'
+        'secteur_id'
     ];
 
     /**
@@ -53,8 +53,8 @@ class Validator extends Authenticatable
         ];
     }
 
-    public function filiere()
+    public function secteur()
     {
-        return $this->belongsTo(Filiere::class);
+        return $this->belongsTo(Secteur::class);
     }
 }

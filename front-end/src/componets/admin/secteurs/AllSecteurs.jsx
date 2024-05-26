@@ -1,46 +1,45 @@
 import React, { useEffect } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
-import { Link } from "react-router-dom";
 import { useAppContext } from "../../../config/context/ComponentContext";
-import UpdateValidator from "../../models/UpdateValidator";
-import CreateValidator from "../../models/CreateValidator";
+import CreateSecteur from "../../models/CreateSecteur";
+import UpdateSecteur from "../../models/UpdateSecteur";
 
-const AllValidators = () => {
-  const [validators, setValidators] = React.useState(null);
+const AllSecteurs = () => {
+  const [secteurs, setSecteurs] = React.useState(null);
   const [deleteLoading, setDeleteLoading] = React.useState(false);
   const { setErrors } = useAppContext();
-  const getAllValidators = async () => {
+  const getAllSecteurs = async () => {
     try {
-      const { data } = await axiosClient.get("admin/validators");
-      setValidators(data);
+      const { data } = await axiosClient.get("admin/secteurs");
+      setSecteurs(data);
       setErrors(null);
     } catch (error) {
       console.log(error);
     }
   };
-  const deleteValidator = async (validator) => {
+  const deleteSecteur = async (secteur) => {
     setDeleteLoading(true);
     document.getElementById(
-      "deleteBtnValidator" + validator?.id
+      "deleteBtnSecteur" + secteur?.id
     ).disabled = true;
     document.getElementById(
-      "deleteBtnValidator" + validator?.id
+      "deleteBtnSecteur" + secteur?.id
     ).innerHTML = `<span
     class="spinner-border spinner-border-sm"
     role="status"
     aria-hidden="true"
   ></span>`;
     try {
-      await axiosClient.delete( "admin/validators/" + validator?.id );
-      await getAllValidators();
+      await axiosClient.delete("admin/secteurs/" + secteur?.id);
+      await getAllSecteurs();
     } catch (error) {
       console.log(error);
     } finally {
       document.getElementById(
-        "deleteBtnValidator" + validator?.id
+        "deleteBtnSecteur" + secteur?.id
       ).disabled = false;
       document.getElementById(
-        "deleteBtnValidator" + validator?.id
+        "deleteBtnSecteur" + secteur?.id
       ).innerHTML = `Supprimer`;
       setDeleteLoading(false);
     }
@@ -48,7 +47,7 @@ const AllValidators = () => {
 
   useEffect(() => {
     document.title = "Tous les validateurs - OFPPT";
-    getAllValidators();
+    getAllSecteurs();
   }, []);
 
   return (
@@ -57,62 +56,54 @@ const AllValidators = () => {
         type="button"
         className="btn btn-primary mb-3"
         data-bs-toggle="modal"
-        data-bs-target="#CreateValidator"
+        data-bs-target="#CreateSecteur"
       >
-        Ajouter une Validateur
+        Ajouter une secteur
       </button>
-      <CreateValidator
-        targetModel="CreateValidator"
-        getAllValidators={getAllValidators}
-      />    
-      {!validators ? (
+      <CreateSecteur
+        targetModel="CreateSecteur"
+        getAllSecteurs={getAllSecteurs}
+      />
+      {!secteurs ? (
         <h1 className="text-center mt-5 pt-5">Chargement...</h1>
       ) : (
         <table className="table">
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Prenom</th>
-              <th>E-mail</th>
-              <th>Secteur</th>
+              <th>Description</th>
               <th>Les Actions</th>
             </tr>
           </thead>
           <tbody>
-            {validators?.length > 0 ? (
-              validators?.map((validator, i) => (
+            {secteurs?.length > 0 ? (
+              secteurs?.map((secteur, i) => (
                 <tr key={i}>
-                  <td>{validator.first_name}</td>
-                  <td>{validator.last_name}</td>
-                  <td>
-                    <Link to={"mailto:" + validator.email}>
-                      {validator.email}
-                    </Link>
-                  </td>
-                  <td>{validator.secteur.nom}</td>
+                  <td>{secteur.nom}</td>
+                  <td>{secteur.description}</td>
                   <td>
                     <div className="d-flex gap-1 flex-nowrap">
                       <button
                         type="button"
                         className="btn btn-success"
                         data-bs-toggle="modal"
-                        data-bs-target={"#UpdateValidator" + validator.id}
+                        data-bs-target={"#UpdateSecteur" + secteur.id}
                       >
                         Edit
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger"
-                        id={"deleteBtnValidator" + validator.id}
+                        id={"deleteBtnSecteur" + secteur.id}
                         disabled={deleteLoading}
-                        onClick={() => deleteValidator(validator)}
+                        onClick={() => deleteSecteur(secteur)}
                       >
                         Supprimer
                       </button>
-                      <UpdateValidator
-                        targetModel={"UpdateValidator" + validator.id}
-                        getAllValidators={getAllValidators}
-                        validator={validator}
+                      <UpdateSecteur
+                        targetModel={"UpdateSecteur" + secteur.id}
+                        getAllSecteurs={getAllSecteurs}
+                        secteur={secteur}
                       />
                     </div>
                   </td>
@@ -128,4 +119,4 @@ const AllValidators = () => {
   );
 };
 
-export default AllValidators;
+export default AllSecteurs;

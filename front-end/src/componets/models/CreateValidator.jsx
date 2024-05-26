@@ -7,18 +7,18 @@ import PropTypes from "prop-types";
 const CreateValidator = ({ targetModel, getAllValidators }) => {
   const { setErrors, errors } = useAppContext();
   const [loading, setLoading] = useState(false);
-  const [filieres, setFilieres] = useState([]);
+  const [secteurs, setSecteurs] = useState([]);
   const cancelModel = useRef();
   const addValidator = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const { first_name, last_name, email, filiere } = e.target.elements;
+    const { first_name, last_name, email, secteur } = e.target.elements;
     try {
       const { data } = await axiosClient.post("admin/validators", {
         first_name: first_name.value,
         last_name: last_name.value,
         email: email.value,
-        filiere_id: filiere.value,
+        secteur_id: secteur.value,
       });
       await getAllValidators();
       cancelModel.current.click();
@@ -36,17 +36,17 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
     }
   };
 
-  const getFilieres = async () => {
+  const getSecteurs = async () => {
     try {
-      const { data } = await axiosClient.get("/filiere");
-      setFilieres(data);
+      const { data } = await axiosClient.get("/secteur");
+      setSecteurs(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getFilieres();
+    getSecteurs();
   }, []);
 
   return (
@@ -119,18 +119,18 @@ const CreateValidator = ({ targetModel, getAllValidators }) => {
 
               <div data-mdb-input-init className="form-outline mb-4">
                 <label className="form-label" htmlFor="form2Example2">
-                  Filiere <span className="text text-danger">*</span>
+                  Secteur <span className="text text-danger">*</span>
                 </label>
                 <br />
-                <select name="filiere" id="filiere" className="form-select">
-                  <option value="">Selectionner une filiere</option>
-                  {filieres?.map((filiere) => (
-                    <option key={filiere.id} value={filiere.id}>
-                      {filiere.nom}
+                <select name="secteur" id="secteur" className="form-select">
+                  <option value="">Selectionner une secteur</option>
+                  {secteurs?.map((secteur) => (
+                    <option key={secteur.id} value={secteur.id}>
+                      {secteur.nom}
                     </option>
                   ))}
                 </select>
-                <span className="text text-danger">{errors?.filiere_id}</span>
+                <span className="text text-danger">{errors?.secteur_id}</span>
               </div>
 
               <div className="modal-footer">
