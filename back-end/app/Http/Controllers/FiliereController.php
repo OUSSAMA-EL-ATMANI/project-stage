@@ -18,7 +18,8 @@ class FiliereController extends Controller
     {
         $rules = [
             'nom' => 'required',
-            'description' => 'required'
+            'code' => 'required',
+            'secteur_id' => 'required',
         ];
 
         $validate = Validator::make($request->all(), $rules);
@@ -34,7 +35,9 @@ class FiliereController extends Controller
     {
         $rules = [
             'nom' => 'required',
-            'description' => 'required'
+            'code' => 'required',
+            'secteur_id' => 'required',
+
         ];
 
         $validate = Validator::make($request->all(), $rules);
@@ -50,5 +53,11 @@ class FiliereController extends Controller
     {
         $filiere->delete();
         return response()->json(null, 204);
+    }
+
+    public function list($id)
+    {
+        $filieres = Filiere::where('secteur_id', $id)->get();
+        return response()->json($filieres);
     }
 }

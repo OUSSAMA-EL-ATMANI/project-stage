@@ -48,6 +48,7 @@ const AllQuestions = () => {
             <th scope="col">Question</th>
             <th scope="col">Description</th>
             <th scope="col">Secteur</th>
+            <th scope="col">Filiere</th>
             <th scope="col">Télécharger</th>
             <th scope="col">Valider</th>
           </tr>
@@ -59,6 +60,7 @@ const AllQuestions = () => {
               <td>{question.file_name}</td>
               <td>{question.description}</td>
               <td>{question.secteur.nom}</td>
+              <td>{question.filiere.nom}</td>
               <td>
                 <button
                   className="btn btn-primary"

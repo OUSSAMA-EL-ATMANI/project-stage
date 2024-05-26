@@ -120,7 +120,8 @@ class DesignerController extends Controller
             'file' => 'required|mimes:csv,txt,pdf,doc,docx,xls,xlsx,jpeg,png,jpg|max:50000',
             'file_name' => 'required',
             'description' => 'required',
-            'secteur_id' => 'required',
+            'secteur_id' => 'required|exists:secteurs,id',
+            // 'filiere_id' => 'required|exists:filieres,id',
         ];
 
         $data = $request->all();
@@ -154,6 +155,7 @@ class DesignerController extends Controller
         $question->file_name = $request->file_name;
         $question->description = $request->description;
         $question->secteur_id = $request->secteur_id;
+        $question->filiere_id = $request->filiere_id;
         $question->designer_id = auth('designer')->user()->id;
         $question->save();
         // Validator::each(function ($validator) use ($question) {

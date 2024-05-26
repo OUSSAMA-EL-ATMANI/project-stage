@@ -9,9 +9,12 @@ class Filiere extends Model
 {
     use HasFactory;
 
+    public $with = ['secteur'];
+
     protected $fillable = [
         'nom',
-        'description'
+        'code',
+        'secteur_id',
     ];
 
     /**
@@ -28,5 +31,10 @@ class Filiere extends Model
     public function validators()
     {
         return $this->hasMany(Validator::class);
+    }
+
+    public function secteur()
+    {
+        return $this->belongsTo(Secteur::class);
     }
 }

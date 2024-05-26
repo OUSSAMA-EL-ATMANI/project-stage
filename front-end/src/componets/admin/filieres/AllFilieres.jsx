@@ -71,7 +71,8 @@ const AllFilieres = () => {
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Description</th>
+              <th>Code</th>
+              <th>Secteur</th>
               <th>Les Actions</th>
             </tr>
           </thead>
@@ -80,7 +81,8 @@ const AllFilieres = () => {
               filieres?.map((filiere, i) => (
                 <tr key={i}>
                   <td>{filiere.nom}</td>
-                  <td>{filiere.description}</td>
+                  <td>{filiere.code}</td>
+                  <td>{filiere.secteur?.nom}</td>
                   <td>
                     <div className="d-flex gap-1 flex-nowrap">
                       <button

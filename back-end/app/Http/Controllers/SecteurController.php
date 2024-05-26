@@ -18,7 +18,6 @@ class SecteurController extends Controller
     {
         $rules = [
             'nom' => 'required',
-            'description' => 'required'
         ];
 
         $validate = Validator::make($request->all(), $rules);
@@ -34,7 +33,6 @@ class SecteurController extends Controller
     {
         $rules = [
             'nom' => 'required',
-            'description' => 'required'
         ];
 
         $validate = Validator::make($request->all(), $rules);

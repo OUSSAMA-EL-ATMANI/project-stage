@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../../config/context/ComponentContext";
 import { axiosClient } from "../../config/Api/AxiosClient";
 import Swal from "sweetalert2";
@@ -8,15 +8,17 @@ const CreateFiliere = ({ targetModel, getAllFilieres }) => {
   const { setErrors, errors } = useAppContext();
   const [loading, setLoading] = useState(false);
   const cancelModel = useRef();
+  const [secteurs, setSecteurs] = useState([]);
 
-  const addDesigner = async (e) => {
+  const addFiliere = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const { nom, description } = e.target.elements;
+    const { nom, code, secteur } = e.target.elements;
     try {
       const { data } = await axiosClient.post("admin/filieres", {
         nom: nom.value,
-        description: description.value,
+        code: code.value,
+        secteur_id: secteur.value,
       });
       await getAllFilieres();
       cancelModel.current.click();
@@ -32,6 +34,19 @@ const CreateFiliere = ({ targetModel, getAllFilieres }) => {
       setLoading(false);
     }
   };
+
+  const getSecteurs = async () => {
+    try {
+      const { data } = await axiosClient.get("/secteur");
+      setSecteurs(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSecteurs();
+  }, []);
 
   return (
     <div
@@ -55,7 +70,7 @@ const CreateFiliere = ({ targetModel, getAllFilieres }) => {
             />
           </div>
           <div className="modal-body">
-            <form onSubmit={addDesigner}>
+            <form onSubmit={addFiliere}>
               <div data-mdb-input-init className="form-outline mb-4">
                 <label className="form-label" htmlFor="form2Example1">
                   Nom <span className="text text-danger">*</span>
@@ -73,17 +88,33 @@ const CreateFiliere = ({ targetModel, getAllFilieres }) => {
 
               <div data-mdb-input-init className="form-outline mb-4">
                 <label className="form-label" htmlFor="form2Example2">
-                  Prenom <span className="text text-danger">*</span>
+                  Code <span className="text text-danger">*</span>
                 </label>
                 <input
                   type="text"
                   id="form2Example2"
                   className={
-                    "form-control" + (errors?.description ? " is-invalid" : "")
+                    "form-control" + (errors?.code ? " is-invalid" : "")
                   }
-                  name="description"
+                  name="code"
                 />
-                <span className="text text-danger">{errors?.description}</span>
+                <span className="text text-danger">{errors?.code}</span>
+              </div>
+
+              <div data-mdb-input-init className="form-outline mb-4">
+                <label className="form-label" htmlFor="form2Example2">
+                  Secteur <span className="text text-danger">*</span>
+                </label>
+                <br />
+                <select name="secteur" id="secteur" className="form-select">
+                  <option value="">Selectionner une secteur</option>
+                  {secteurs?.map((secteur) => (
+                    <option key={secteur.id} value={secteur.id}>
+                      {secteur.nom}
+                    </option>
+                  ))}
+                </select>
+                <span className="text text-danger">{errors?.secteur_id}</span>
               </div>
 
               <div className="modal-footer">

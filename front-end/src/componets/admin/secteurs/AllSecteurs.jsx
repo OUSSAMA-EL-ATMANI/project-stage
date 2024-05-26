@@ -71,7 +71,6 @@ const AllSecteurs = () => {
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Description</th>
               <th>Les Actions</th>
             </tr>
           </thead>
@@ -80,7 +79,6 @@ const AllSecteurs = () => {
               secteurs?.map((secteur, i) => (
                 <tr key={i}>
                   <td>{secteur.nom}</td>
-                  <td>{secteur.description}</td>
                   <td>
                     <div className="d-flex gap-1 flex-nowrap">
                       <button

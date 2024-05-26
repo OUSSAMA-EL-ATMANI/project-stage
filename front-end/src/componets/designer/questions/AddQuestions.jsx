@@ -9,6 +9,8 @@ const AddQuestions = () => {
   const [errors, setErrors] = useState({});
   const navigateTo = useNavigate();
   const [secteurs, setSecteurs] = useState([]);
+  const [filieres, setFilieres] = useState([]);
+  const [secteurId, setSecteurId] = useState(0);
 
   const getSecteurs = async () => {
     try {
@@ -24,6 +26,19 @@ const AddQuestions = () => {
     getSecteurs();
   }, []);
 
+  const getFilieres = async () => {
+    try {
+      const { data } = await axiosClient.get(`/filiereList/${secteurId}`);
+      setFilieres(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getFilieres();
+  }, [secteurId]);
+
   const uploadFile = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -33,6 +48,7 @@ const AddQuestions = () => {
     formData.append("file_name", e.target.file_name.value);
     formData.append("description", e.target.description.value);
     formData.append("secteur_id", e.target.secteur_id.value);
+    formData.append("filiere_id", e.target.filiere_id.value);
     try {
       const { data } = await axiosClient.post(
         "/designer/upload-questions",
@@ -111,7 +127,7 @@ const AddQuestions = () => {
               Secteur <span className="text text-danger">*</span>
             </label>
             <br />
-            <select name="secteur_id" id="secteur_id" className="form-select">
+            <select name="secteur_id" id="secteur_id" className="form-select" onChange={(e) => setSecteurId(e.target.value)}>
               {secteurs?.map((secteur) => (
                 <option key={secteur.id} value={secteur.id}>
                   {secteur.nom}
@@ -119,6 +135,21 @@ const AddQuestions = () => {
               ))}
             </select>
             <span className="text text-danger">{errors?.secteur_id}</span>
+          </div>
+
+          <div data-mdb-input-init className="form-outline mb-4">
+            <label className="form-label" htmlFor="form2Example1">
+              Filiere <span className="text text-danger">*</span>
+            </label>
+            <br />
+            <select name="filiere_id" id="filiere_id" className="form-select">
+              {filieres?.map((filiere) => (
+                <option key={filiere.id} value={filiere.id}>
+                  {filiere.nom}
+                </option>
+              ))}
+            </select>
+            <span className="text text-danger">{errors?.filiere_id}</span>
           </div>
 
           <div className="d-flex justify-content-center align-items-center">

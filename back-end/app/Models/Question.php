@@ -10,7 +10,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $with = ['secteur', 'designer'];
+    protected $with = ['secteur', 'designer', 'filiere'];
     protected $fillable = [
         'file_name',
         'description',
@@ -20,6 +20,7 @@ class Question extends Model
         'is_accepted',
         'points',
         'secteur_id',
+        'filiere_id',
         'designer_id',
     ];
 
@@ -32,5 +33,10 @@ class Question extends Model
     public function secteur()
     {
         return $this->belongsTo(Secteur::class);
+    }
+
+    public function filiere()
+    {
+        return $this->belongsTo(Filiere::class);
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_accepted')->default(0);
             $table->integer('points')->default(0);
             $table->foreignId('secteur_id')->constrained('secteurs')->cascadeOnDelete();
+            $table->foreignId('filiere_id')->nullable()->constrained('filieres')->cascadeOnDelete();
             $table->foreignId('designer_id')->constrained('designers')->cascadeOnDelete();
             $table->timestamps();
         });

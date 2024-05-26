@@ -35,4 +35,5 @@ Route::group([
 
 
 Route::get('/filiere', [FiliereController::class, 'index']);
+Route::get('/filiereList/{id}', [FiliereController::class, 'list']);
 Route::get('/secteur', [SecteurController::class, 'index']);

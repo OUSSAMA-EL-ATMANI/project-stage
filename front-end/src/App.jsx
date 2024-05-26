@@ -23,6 +23,7 @@ import AllQuestionsValidated from "./componets/Validator/_questions/AllQuestions
 import QuestionValidation from "./componets/Validator/_questions/QuestionValidation";
 import AllAdminQuestions from "./componets/admin/questions/AllAdminQuestions";
 import AllSecteurs from "./componets/admin/secteurs/AllSecteurs";
+import AllFilieres from "./componets/admin/filieres/AllFilieres";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="validateurs-managment" element={<AllValidators />} />
           <Route path="questions-managment" element={<AllAdminQuestions />} />
           <Route path="secteurs-managment" element={<AllSecteurs />} />
+          <Route path="filieres-managment" element={<AllFilieres />} />
         </Route>
 
         <Route path="/concepteur" element={<ConcepteurIndex />}>
