@@ -24,15 +24,15 @@ const QuestionValidation = () => {
   }, []);
 
   const [criteria, setCriteria] = useState({
-    clartéDesInstructions: false,
-    policeEtMiseEnPage: false,
-    pertinenceContenuCours: false,
-    variétéDesQuestions: false,
-    niveauDeDifficulté: false,
-    équité: false,
-    organisationLogique: false,
-    adéquationDuTemps: false,
-    couvertureObjectifsApprentissage: false,
+    LEntêteestrespecté: false,
+    Lafilièreestmentionnéeetcorrecte: false,
+    Legroupeestmentionné: false,
+    Laduréeestmentionnée: false,
+    Lintitulédumoduleestmentionéetcorrecte: false,
+    lebarèmeestmentionné: false,
+    Lepreuverépondauxobjectifsdumodule: false,
+    Laduréedelépreuveestsuffisante: false,
+    Lasommationdubarèmeestcorrecte: false,
     grilleDeNotationClaire: false,
   });
 
@@ -74,11 +74,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="clartéDesInstructions"
-            checked={criteria.clartéDesInstructions}
+            name="LEntêteestrespecté"
+            checked={criteria.LEntêteestrespecté}
             onChange={handleChange}
           />
-          Clarté des Instructions
+           L'En-tête est respecté		
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -86,11 +86,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="policeEtMiseEnPage"
-            checked={criteria.policeEtMiseEnPage}
+            name="Lafilièreestmentionnéeetcorrecte"
+            checked={criteria.Lafilièreestmentionnéeetcorrecte}
             onChange={handleChange}
           />
-          Police et Mise en Page
+          La filière est mentionnée et correcte		
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -98,8 +98,8 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="pertinenceContenuCours"
-            checked={criteria.pertinenceContenuCours}
+            name="Legroupeestmentionné"
+            checked={criteria.Legroupeestmentionné}
             onChange={handleChange}
           />
           Pertinence par Rapport au Contenu du Cours
@@ -110,11 +110,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="variétéDesQuestions"
-            checked={criteria.variétéDesQuestions}
+            name="Laduréeestmentionnée"
+            checked={criteria.Laduréeestmentionnée}
             onChange={handleChange}
           />
-          Variété des Questions
+          La durée est mentionnée
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -122,11 +122,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="niveauDeDifficulté"
-            checked={criteria.niveauDeDifficulté}
+            name="Lintitulédumoduleestmentionéetcorrecte"
+            checked={criteria.Lintitulédumoduleestmentionéetcorrecte}
             onChange={handleChange}
           />
-          Niveau de Difficulté
+          L'intitulé du module est mentioné et correcte	
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -134,11 +134,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="équité"
-            checked={criteria.équité}
+            name="lebarèmeestmentionné"
+            checked={criteria.lebarèmeestmentionné}
             onChange={handleChange}
           />
-          Équité
+          Le barème est mentionné		
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -146,11 +146,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="organisationLogique"
-            checked={criteria.organisationLogique}
+            name="Lepreuverépondauxobjectifsdumodule"
+            checked={criteria.Lepreuverépondauxobjectifsdumodule}
             onChange={handleChange}
           />
-          Organisation Logique
+          L'epreuve répond aux objectifs du module
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -158,11 +158,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="adéquationDuTemps"
-            checked={criteria.adéquationDuTemps}
+            name="Laduréedelépreuveestsuffisante"
+            checked={criteria.Laduréedelépreuveestsuffisante}
             onChange={handleChange}
           />
-          Adéquation du Temps
+          La durée de l'épreuve est suffisante
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -170,11 +170,11 @@ const QuestionValidation = () => {
           <input
             className='form-check-input'
             type="checkbox"
-            name="couvertureObjectifsApprentissage"
-            checked={criteria.couvertureObjectifsApprentissage}
+            name="Lasommationdubarèmeestcorrecte"
+            checked={criteria.Lasommationdubarèmeestcorrecte}
             onChange={handleChange}
           />
-          Couverture des Objectifs d&apos;Apprentissage
+         La sommation du barème est correcte
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
