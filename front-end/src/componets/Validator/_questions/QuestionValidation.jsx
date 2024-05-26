@@ -33,7 +33,6 @@ const QuestionValidation = () => {
     Lepreuverépondauxobjectifsdumodule: false,
     Laduréedelépreuveestsuffisante: false,
     Lasommationdubarèmeestcorrecte: false,
-    grilleDeNotationClaire: false,
   });
 
   const handleChange = (event) => {
@@ -69,6 +68,8 @@ const QuestionValidation = () => {
   return (
     <form onSubmit={validateQuestion} className="container mt-5 justify-content-center">
       <h2 className="text-center">Évaluation de l&apos;examen: {question?.file_name}</h2>
+      <hr />
+      <h3 className='text-center'>En-tête de l&apos;épreuvee</h3>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
@@ -78,7 +79,7 @@ const QuestionValidation = () => {
             checked={criteria.LEntêteestrespecté}
             onChange={handleChange}
           />
-           L'En-tête est respecté		
+          L&apos;En-tête est respecté
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -90,7 +91,7 @@ const QuestionValidation = () => {
             checked={criteria.Lafilièreestmentionnéeetcorrecte}
             onChange={handleChange}
           />
-          La filière est mentionnée et correcte		
+          La filière est mentionnée et correcte
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -126,7 +127,7 @@ const QuestionValidation = () => {
             checked={criteria.Lintitulédumoduleestmentionéetcorrecte}
             onChange={handleChange}
           />
-          L'intitulé du module est mentioné et correcte	
+          L&apos;intitulé du module est mentioné et correcte
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -138,9 +139,10 @@ const QuestionValidation = () => {
             checked={criteria.lebarèmeestmentionné}
             onChange={handleChange}
           />
-          Le barème est mentionné		
+          Le barème est mentionné
         </label>
       </div>
+      <h3 className='text-center'>Corp de l&apos;épreuve</h3>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
         <label className='form-check-label'>
           <input
@@ -150,7 +152,7 @@ const QuestionValidation = () => {
             checked={criteria.Lepreuverépondauxobjectifsdumodule}
             onChange={handleChange}
           />
-          L'epreuve répond aux objectifs du module
+          L&apos;epreuve répond aux objectifs du module
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -162,7 +164,7 @@ const QuestionValidation = () => {
             checked={criteria.Laduréedelépreuveestsuffisante}
             onChange={handleChange}
           />
-          La durée de l'épreuve est suffisante
+          La durée de l&apos;épreuve est suffisante
         </label>
       </div>
       <div className="form-check m-auto" style={{ width: 'fit-content' }}>
@@ -174,19 +176,7 @@ const QuestionValidation = () => {
             checked={criteria.Lasommationdubarèmeestcorrecte}
             onChange={handleChange}
           />
-         La sommation du barème est correcte
-        </label>
-      </div>
-      <div className="form-check m-auto" style={{ width: 'fit-content' }}>
-        <label className='form-check-label'>
-          <input
-            className='form-check-input'
-            type="checkbox"
-            name="grilleDeNotationClaire"
-            checked={criteria.grilleDeNotationClaire}
-            onChange={handleChange}
-          />
-          Grille de Notation Claire
+          La sommation du barème est correcte
         </label>
       </div>
       <textarea placeholder='Commentaire' className='form-control mt-5 m-auto w-50' name='commentaire'></textarea>

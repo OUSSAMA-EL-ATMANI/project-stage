@@ -101,10 +101,10 @@ class QuestionController extends Controller
         if (!$question) {
             return response(['message' => 'Questions introuvable'], 404);
         };
-        if ($request->points < 80) {
+        if ($request->points < 70) {
             $question->is_accepted = false;
         };
-        if ($request->points >= 80) {
+        if ($request->points >= 70) {
             $question->is_accepted = true;
         };
         $question->is_visible = true;

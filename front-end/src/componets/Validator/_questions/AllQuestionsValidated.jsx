@@ -15,7 +15,7 @@ const AllQuestionsValidated = () => {
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement("a");
       link.href = url;
-      const pdfName = "Exam_" + question?.file_name + ".pdf";
+      const pdfName = "Exam_" + question?.file_path;
       link.setAttribute("download", pdfName);
       document.body.appendChild(link);
       link.click();
@@ -76,7 +76,7 @@ const AllQuestionsValidated = () => {
                   </span>
                 )}
               </td>
-              <td>{question.points}</td>
+              <td>{question.points}/90</td>
               <td>
                 <button
                   className="btn btn-primary"

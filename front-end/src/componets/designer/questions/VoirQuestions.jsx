@@ -82,7 +82,7 @@ const AddQuestions = () => {
                       </span>
                     )}
                   </td>
-                  <td>{question.points}</td>
+                  <td>{question.points}/90</td>
                   <td>
                     <button
                       className="btn btn-primary"
