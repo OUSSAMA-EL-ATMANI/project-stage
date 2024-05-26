@@ -94,6 +94,14 @@ class ValidatorController extends Controller
         return response()->json(['message' => 'Validator deleted successfully'], 200);
     }
 
+    public function resetPassword($id)
+    {
+        $validator = Validator::find($id);
+        $validator->password = Hash::make('ofppt');
+        $validator->save();
+        return response()->json($validator, 200);
+    }
+
     public function questionsToValidate()
     {
         $validator = auth('validator')->user();

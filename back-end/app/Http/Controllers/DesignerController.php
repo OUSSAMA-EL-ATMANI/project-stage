@@ -113,6 +113,14 @@ class DesignerController extends Controller
         return response()->json(['message' => 'concepteur a ete supprime avec succes']);
     }
 
+    public function resetPassword($id)
+    {
+        $validator = Designer::find($id);
+        $validator->password = Hash::make('ofppt');
+        $validator->save();
+        return response()->json($validator, 200);
+    }
+
 
     public function sendQuestions(Request $request)
     {

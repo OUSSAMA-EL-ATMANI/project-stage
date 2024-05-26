@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../../../config/context/ComponentContext";
 import UpdateValidator from "../../models/UpdateValidator";
 import CreateValidator from "../../models/CreateValidator";
+import Swal from "sweetalert2";
 
 const AllValidators = () => {
   const [validators, setValidators] = React.useState(null);
@@ -31,7 +32,7 @@ const AllValidators = () => {
     aria-hidden="true"
   ></span>`;
     try {
-      await axiosClient.delete( "admin/validators/" + validator?.id );
+      await axiosClient.delete("admin/validators/" + validator?.id);
       await getAllValidators();
     } catch (error) {
       console.log(error);
@@ -51,6 +52,17 @@ const AllValidators = () => {
     getAllValidators();
   }, []);
 
+  const handleReset = async (validator) => {
+    try {
+      await axiosClient.put("admin/reset-validator/" + validator?.id);
+      Swal.fire("Le mot de passe a bien été réinitialisé !", "Nouveau mot de passe: ofppt", "success");
+      await getAllValidators();
+    } catch (error) {
+      Swal.fire("Une erreur est survenue !", error.response.data.message, "error");
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container mt-5 pt-5">
       <button
@@ -64,7 +76,7 @@ const AllValidators = () => {
       <CreateValidator
         targetModel="CreateValidator"
         getAllValidators={getAllValidators}
-      />    
+      />
       {!validators ? (
         <h1 className="text-center mt-5 pt-5">Chargement...</h1>
       ) : (
@@ -114,6 +126,13 @@ const AllValidators = () => {
                         getAllValidators={getAllValidators}
                         validator={validator}
                       />
+                      <button
+                        onClick={() => handleReset(validator)}
+                        type="button"
+                        className="btn btn-primary"
+                      >
+                        Reset mot de Passe
+                      </button>
                     </div>
                   </td>
                 </tr>
