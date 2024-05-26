@@ -57,10 +57,10 @@ const AllQuestions = () => {
           {questions.map((question, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{question.file_name}</td>
-              <td>{question.description}</td>
-              <td>{question.secteur.nom}</td>
-              <td>{question.filiere.nom}</td>
+              <td>{question?.file_name}</td>
+              <td>{question?.description}</td>
+              <td>{question?.secteur?.nom}</td>
+              <td>{question?.filiere?.nom}</td>
               <td>
                 <button
                   className="btn btn-primary"
