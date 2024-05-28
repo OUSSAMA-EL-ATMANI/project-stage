@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
+import Swal from "sweetalert2";
 
 const AddAminQuestions = () => {
 
   const [questions, setQuestions] = useState([]);
+
+  const [loading, setLodaing] = useState(false);
 
   const downloadQuestion = async (question) => {
     try {
@@ -36,6 +39,28 @@ const AddAminQuestions = () => {
     getQuestions();
   }, []);
 
+  const deleteQuestion = async (question) => {
+    try {
+      setLodaing(true);
+      const { data } = await axiosClient.delete(`/admin/delete-question/${question?.id}`);
+      getQuestions();
+      Swal.fire({
+        icon: 'success',
+        title: 'Question supprimé',
+      })
+      console.log(data);
+      setLodaing(false);
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Une erreur est survenue',
+      })
+      console.error(error);
+      setLodaing(false);
+    }
+  };
+
   return (
     <div className="row g-3 w-100 m-auto">
       <table className="table table-striped">
@@ -50,6 +75,7 @@ const AddAminQuestions = () => {
             <th scope="col">Points</th>
             <th scope="col">Télécharger</th>
             <th scope="col">Commentaire</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -64,6 +90,7 @@ const AddAminQuestions = () => {
               <td>{question?.points}/90</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
               <td>{question?.commentaire}</td>
+              <td><button className="btn btn-danger" onClick={() => deleteQuestion(question)}>{loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Supprimer"}</button></td>
             </tr>
           ))}
         </tbody>

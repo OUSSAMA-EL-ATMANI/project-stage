@@ -45,9 +45,12 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $question = Question::find($id);
+        if (!$question) return response()->json(['message' => 'question introuvable']);
+        $question->delete();
+        return response()->json(['message' => 'question a ete supprime avec succes']);
     }
 
     public function accept()

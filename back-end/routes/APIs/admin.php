@@ -17,6 +17,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/secteurs', [SecteurController::class, 'store']);
     Route::put('/secteurs/{secteur}', [SecteurController::class, 'update']);
     Route::delete('/secteurs/{secteur}', [SecteurController::class, 'destroy']);
+    Route::delete('/delete-question/{id}', [QuestionController::class, 'destroy']);
     Route::get('/get-questions', [QuestionController::class, 'getAdminQuestions']);
     Route::get('/download-questions/{id}', [QuestionController::class, 'downloadQuestions']);
     Route::put('/reset-validator/{id}', [ValidatorController::class, 'resetPassword']);
