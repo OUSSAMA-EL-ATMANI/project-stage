@@ -55,6 +55,13 @@ class QuestionController extends Controller
         return response()->json(['message' => 'question a ete supprime avec succes']);
     }
 
+    public function getQuestionsDetails($id)
+    {
+        $question = Question::find($id);
+        if (!$question) return response()->json(['message' => 'question introuvable']);
+        return response()->json($question);
+    }
+
     public function accept()
     {
         $request = request();
@@ -138,6 +145,7 @@ class QuestionController extends Controller
         $question->is_visible = true;
         $question->commentaire = $request->commentaire;
         $question->points = $request->points;
+        $question->validator_id = $request->user()->id;
         $question->save();
 
         $criteria = [

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
+import { Link } from "react-router-dom";
 
 const AddQuestions = () => {
   const [lodaing, setLodaing] = useState(true);
@@ -56,6 +57,7 @@ const AddQuestions = () => {
                 <th scope="col">Points</th>
                 <th scope="col">Télécharger</th>
                 <th scope="col">Commentaire</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -92,6 +94,14 @@ const AddQuestions = () => {
                     </button>
                   </td>
                   <td>{question.commentaire}</td>
+                  <td>
+                    <Link
+                      to={`/concepteur/voir-questions/${question.id}`}
+                      className="btn btn-primary"
+                    >
+                      Afficher
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

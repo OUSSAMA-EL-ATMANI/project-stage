@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Question extends Model
 {
     use HasFactory, SoftDeletes;
-    
-    protected $with = ['secteur', 'designer', 'filiere', 'criteres'];
+
+    protected $with = ['secteur', 'designer', 'filiere', 'criteres', 'validator'];
     protected $fillable = [
         'file_name',
         'description',
@@ -23,6 +23,7 @@ class Question extends Model
         'secteur_id',
         'filiere_id',
         'designer_id',
+        'validator_id',
     ];
 
 
@@ -44,5 +45,10 @@ class Question extends Model
     public function criteres()
     {
         return $this->hasMany(Critere::class);
+    }
+
+    public function validator()
+    {
+        return $this->belongsTo(Validator::class);
     }
 }

@@ -25,6 +25,7 @@ import AllAdminQuestions from "./componets/admin/questions/AllAdminQuestions";
 import AllSecteurs from "./componets/admin/secteurs/AllSecteurs";
 import AllFilieres from "./componets/admin/filieres/AllFilieres";
 import AdminQuestion from "./componets/admin/questions/AdminQuestion";
+import DesignerQuestion from "./componets/designer/questions/DesignerQuestion";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           />
           <Route path="ajouter-questions" element={<AddQuestions />} />
           <Route path="voir-questions" element={<VoirQuestions />} />
+          <Route path="voir-questions/:id" element={<DesignerQuestion />} />
         </Route>
 
         <Route path="/validateur" element={<ValidateurIndex />}>

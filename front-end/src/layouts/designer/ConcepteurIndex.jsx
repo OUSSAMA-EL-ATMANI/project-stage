@@ -12,7 +12,7 @@ const ConcepteurIndex = () => {
       localStorage.getItem("ud") &&
       JSON.parse(localStorage.getItem("ud")).role === "designer"
     ) {
-      document.title = "Designer Dashboard - OFPPT";
+      document.title = "Concepteur Dashboard - OFPPT";
     } else {
       navigateTo("/");
     }
