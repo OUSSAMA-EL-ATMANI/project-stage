@@ -11,7 +11,7 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
     
-    protected $with = ['secteur', 'designer', 'filiere'];
+    protected $with = ['secteur', 'designer', 'filiere', 'criteres'];
     protected $fillable = [
         'file_name',
         'description',
@@ -39,5 +39,10 @@ class Question extends Model
     public function filiere()
     {
         return $this->belongsTo(Filiere::class);
+    }
+
+    public function criteres()
+    {
+        return $this->hasMany(Critere::class);
     }
 }

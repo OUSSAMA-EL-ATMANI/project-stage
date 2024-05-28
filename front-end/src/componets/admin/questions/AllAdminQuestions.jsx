@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../../config/Api/AxiosClient";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const AddAminQuestions = () => {
 
@@ -90,7 +91,10 @@ const AddAminQuestions = () => {
               <td>{question?.points}/90</td>
               <td><button className="btn btn-primary" onClick={() => downloadQuestion(question)}>Télécharger</button></td>
               <td>{question?.commentaire}</td>
-              <td><button className="btn btn-danger" onClick={() => deleteQuestion(question)}>{loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Supprimer"}</button></td>
+              <td className="d-flex gap-2">
+                <button className="btn btn-danger" onClick={() => deleteQuestion(question)}>{loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Supprimer"}</button>
+                <Link to={`/administrateur/questions-managment/${question?.id}`} className="btn btn-primary">Afficher</Link>
+              </td>
             </tr>
           ))}
         </tbody>

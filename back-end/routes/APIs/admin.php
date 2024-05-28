@@ -19,6 +19,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::delete('/secteurs/{secteur}', [SecteurController::class, 'destroy']);
     Route::delete('/delete-question/{id}', [QuestionController::class, 'destroy']);
     Route::get('/get-questions', [QuestionController::class, 'getAdminQuestions']);
+    Route::get('/get-questions/{id}', [QuestionController::class, 'getQuestions']);
     Route::get('/download-questions/{id}', [QuestionController::class, 'downloadQuestions']);
     Route::put('/reset-validator/{id}', [ValidatorController::class, 'resetPassword']);
     Route::put('/reset-designer/{id}', [DesignerController::class, 'resetPassword']);

@@ -171,6 +171,13 @@ class QuestionController extends Controller
         return response()->json($questions);
     }
 
+    public function getQuestions($id)
+    {
+        $question = Question::find($id);
+        if (!$question) return response()->json(['message' => 'question introuvable']);
+        return response()->json($question);
+    }
+
     public function downloadQuestions($id)
     {
         $question = Question::find($id);
