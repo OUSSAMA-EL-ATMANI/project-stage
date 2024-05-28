@@ -93,6 +93,25 @@ function AdminQuestion() {
                     </table>
                 </div>
             </div>
+            <div className="card mt-5 mb-5">
+                <div className="card-body">
+                    <h2 className="card-title">Membres de la commission de validation </h2>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{question?.validator?.first_name} {question?.validator?.last_name}</td>
+                                <td>{question?.validator?.email}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     )
 }
