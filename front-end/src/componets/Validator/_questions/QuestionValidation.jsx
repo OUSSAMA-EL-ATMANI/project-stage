@@ -101,8 +101,8 @@ const QuestionValidation = () => {
     <form onSubmit={validateQuestion} className="container mt-3 mb-3 justify-content-center">
       <h2 className="text-center">Évaluation de l&apos;examen: {question?.file_name}</h2>
       <hr />
-      <table className="table">
-        <tbody className='table table-bordered'>
+      <table className="table table-striped">
+        <tbody>
           {[
             { name: "LEntêteestrespecté", label: "L'En-tête est respecté", commentaire: "Entete_commentaire" },
             { name: "Lafilièreestmentionnéeetcorrecte", label: "La filière est mentionnée et correcte", commentaire: "Filiere_commentaire" },

@@ -67,7 +67,6 @@ const AddAminQuestions = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Question</th>
             <th scope="col">Description</th>
             <th scope="col">Concepteur</th>
@@ -82,7 +81,6 @@ const AddAminQuestions = () => {
         <tbody>
           {questions.map((question, index) => (
             <tr key={index}>
-              <th scope="row">{index + 1}</th>
               <td>{question?.file_name}</td>
               <td>{question?.description}</td>
               <td>{question?.designer?.first_name} {question?.designer?.last_name}</td>

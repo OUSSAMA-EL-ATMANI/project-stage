@@ -86,7 +86,7 @@ function AdminQuestion() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{question?.is_valid ? "✔️" : "❌"}</td>
+                                <td>{question?.is_accepted ? "✔️" : "❌"}</td>
                                 <td>{question?.commentaire}</td>
                             </tr>
                         </tbody>
