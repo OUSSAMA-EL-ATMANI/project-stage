@@ -56,7 +56,7 @@ class ValidatorController extends Controller
             'secteur_id' => 'required',
         ]);
 
-        $password = 'ofppt';
+        $password = Str::random(8);
 
         $validator = new Validator();
         $validator->fill($request->all());
@@ -97,10 +97,12 @@ class ValidatorController extends Controller
     public function resetPassword($id)
     {
         $validator = Validator::find($id);
-        $validator->password = Hash::make('ofppt');
+        $password = Str::random(8);
+        $validator->password = Hash::make($password);
         $validator->save();
-        return response()->json($validator, 200);
+        return response()->json(["message" => "Mot de passe mis à jour avec succes", "password" => $password], 200);
     }
+
 
     public function questionsToValidate()
     {

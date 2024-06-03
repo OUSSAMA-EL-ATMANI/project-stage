@@ -54,8 +54,8 @@ const AllValidators = () => {
 
   const handleReset = async (validator) => {
     try {
-      await axiosClient.put("admin/reset-validator/" + validator?.id);
-      Swal.fire("Le mot de passe a bien été réinitialisé !", "Nouveau mot de passe: ofppt", "success");
+     const { data } = await axiosClient.put("admin/reset-validator/" + validator?.id);
+      Swal.fire("Le mot de passe a bien été réinitialisé !", "Nouveau mot de passe: " + data.password, "success");
       await getAllValidators();
     } catch (error) {
       Swal.fire("Une erreur est survenue !", error.response.data.message, "error");
